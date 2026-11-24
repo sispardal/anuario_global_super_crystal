@@ -1,0 +1,2864 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ANUÁRIO GLOBAL — O mundo em retrospectiva</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome 6 -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --navy-deep: #04132e;
+        --navy-mid: #092658;
+        --royal-blue: #11479b;
+        --royal-bright: #1b65cc;
+        --gold-light: #ffe270;
+        --gold-mid: #f7b519;
+        --gold-dark: #c98206;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Plus Jakarta Sans", "Montserrat", sans-serif;
+        background: radial-gradient(
+          circle at 25% 10%,
+          #1656b8 0%,
+          #092556 48%,
+          #04122b 100%
+        );
+        color: #ffffff;
+        min-height: 100vh;
+        margin: 0;
+        overflow-x: hidden;
+      }
+
+      /* Fundo com textura de mapa-múndi pontilhado e malha tecnológica */
+      .world-bg-pattern {
+        background-image:
+          radial-gradient(rgba(120, 195, 255, 0.2) 1.5px, transparent 1.5px),
+          radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+          linear-gradient(
+            135deg,
+            rgba(16, 74, 165, 0.92) 0%,
+            rgba(5, 23, 56, 0.96) 100%
+          );
+        background-size:
+          26px 26px,
+          13px 13px,
+          100% 100%;
+        background-position:
+          0 0,
+          6px 6px,
+          0 0;
+      }
+
+      /* Título Metálico Dourado 3D */
+      .title-gold {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 900;
+        background: linear-gradient(
+          180deg,
+          #fff5b8 0%,
+          #ffd54f 38%,
+          #f59e0b 78%,
+          #b45309 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.75));
+        letter-spacing: 0.03em;
+      }
+
+      /* Janela Principal Estilo Painel Glossy */
+      .main-window-frame {
+        background: linear-gradient(
+          180deg,
+          rgba(14, 59, 132, 0.95) 0%,
+          rgba(6, 28, 69, 0.98) 100%
+        );
+        border: 1.5px solid rgba(114, 179, 255, 0.45);
+        box-shadow:
+          0 20px 50px rgba(0, 0, 0, 0.65),
+          inset 0 1px 0 rgba(255, 255, 255, 0.35);
+        border-radius: 16px;
+      }
+
+      /* Barra de Título da Seção Principal */
+      .section-header-bar {
+        background: linear-gradient(
+          180deg,
+          #1b63c9 0%,
+          #0f4191 52%,
+          #0a2f6e 100%
+        );
+        border-bottom: 1px solid rgba(135, 195, 255, 0.4);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      }
+
+      /* Botões Laterais de Ano */
+      .year-pill {
+        background: linear-gradient(
+          180deg,
+          #154d9e 0%,
+          #0a2c66 55%,
+          #071e49 100%
+        );
+        border: 1.5px solid rgba(115, 178, 255, 0.45);
+        box-shadow:
+          0 4px 10px rgba(0, 0, 0, 0.4),
+          inset 0 1px 0 rgba(255, 255, 255, 0.25);
+        color: #ffffff;
+        transition: all 0.22s cubic-bezier(0.25, 0.8, 0.25, 1);
+      }
+
+      .year-pill:hover:not(.active) {
+        background: linear-gradient(180deg, #2167cc 0%, #103c85 100%);
+        border-color: #93c5fd;
+        transform: translateX(3px);
+      }
+
+      .year-pill.active {
+        background: linear-gradient(
+          180deg,
+          #ffea79 0%,
+          #f8b81d 52%,
+          #d98207 100%
+        );
+        border: 2px solid #fff7c2;
+        color: #161205;
+        box-shadow:
+          0 0 18px rgba(251, 191, 36, 0.75),
+          0 4px 12px rgba(0, 0, 0, 0.45),
+          inset 0 2px 2px rgba(255, 255, 255, 0.8);
+        transform: scale(1.03);
+      }
+
+      .year-pill.active i {
+        color: #161205;
+      }
+
+      /* Botões de Controle de Janela (Top Right) */
+      .win-btn {
+        width: 34px;
+        height: 28px;
+        border-radius: 6px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(255, 255, 255, 0.55);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.5),
+          0 2px 5px rgba(0, 0, 0, 0.45);
+        transition:
+          transform 0.15s ease,
+          filter 0.15s ease;
+      }
+
+      .win-btn:hover {
+        filter: brightness(1.15);
+        transform: translateY(-1px);
+      }
+
+      .win-btn-blue {
+        background: linear-gradient(180deg, #3b82f6 0%, #1d4ed8 100%);
+      }
+
+      .win-btn-red {
+        background: linear-gradient(
+          180deg,
+          #f87171 0%,
+          #dc2626 55%,
+          #991b1b 100%
+        );
+      }
+
+      /* Cards de Notícias */
+      .news-card-white {
+        background: linear-gradient(180deg, #ffffff 0%, #f1f5fb 100%);
+        border: 1px solid rgba(255, 255, 255, 0.9);
+        box-shadow: 0 8px 20px rgba(2, 12, 34, 0.45);
+        transition:
+          transform 0.22s ease,
+          box-shadow 0.22s ease;
+      }
+
+      .news-card-white:hover {
+        transform: translateY(-3px);
+        box-shadow:
+          0 14px 28px rgba(0, 0, 0, 0.55),
+          0 0 0 2px #fbbf24;
+      }
+
+      /* Banner Publicitário */
+      .ad-banner-bg {
+        background:
+          radial-gradient(
+            circle at 75% 50%,
+            rgba(37, 99, 235, 0.45) 0%,
+            transparent 60%
+          ),
+          linear-gradient(90deg, #072252 0%, #0d3c8c 50%, #072354 100%);
+        border: 1.5px solid rgba(110, 175, 255, 0.5);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.25),
+          0 8px 20px rgba(0, 0, 0, 0.45);
+      }
+
+      .btn-anuncie {
+        background: linear-gradient(
+          180deg,
+          #ffeb7a 0%,
+          #f7b519 52%,
+          #d97706 100%
+        );
+        border: 2px solid #fff7c2;
+        color: #141003;
+        box-shadow:
+          0 4px 15px rgba(245, 158, 11, 0.5),
+          inset 0 1px 1px rgba(255, 255, 255, 0.85);
+        transition: all 0.2s ease;
+      }
+
+      .btn-anuncie:hover {
+        filter: brightness(1.08);
+        transform: scale(1.03);
+        box-shadow: 0 6px 22px rgba(251, 191, 36, 0.75);
+      }
+
+      /* Rodapé Player Rádio Web Super Crystal */
+      .radio-footer-bar {
+        background: linear-gradient(
+          180deg,
+          #0b3375 0%,
+          #051b44 65%,
+          #03112e 100%
+        );
+        border-top: 1.5px solid rgba(114, 179, 255, 0.45);
+        box-shadow: 0 -6px 25px rgba(0, 0, 0, 0.5);
+      }
+
+      /* Range Sliders Customizados */
+      input[type="range"].radio-slider {
+        -webkit-appearance: none;
+        appearance: none;
+        height: 8px;
+        border-radius: 999px;
+        background: #0a2554;
+        border: 1px solid rgba(147, 197, 253, 0.4);
+        outline: none;
+        cursor: pointer;
+      }
+
+      input[type="range"].radio-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle at 35% 35%,
+          #ffffff 0%,
+          #60a5fa 60%,
+          #1d4ed8 100%
+        );
+        border: 2px solid #ffffff;
+        box-shadow: 0 0 8px rgba(96, 165, 250, 0.9);
+        cursor: pointer;
+      }
+
+      /* Animação Equalizador Rádio */
+      @keyframes eqBounce {
+        0%,
+        100% {
+          transform: scaleY(0.35);
+        }
+        50% {
+          transform: scaleY(1);
+        }
+      }
+
+      .eq-bar {
+        transform-origin: bottom;
+        animation: eqBounce 0.7s ease-in-out infinite;
+      }
+
+      .eq-paused .eq-bar {
+        animation-play-state: paused;
+        transform: scaleY(0.45);
+      }
+
+      /* Shimmer Skeleton Loading */
+      @keyframes shimmer {
+        0% {
+          background-position: -600px 0;
+        }
+        100% {
+          background-position: 600px 0;
+        }
+      }
+
+      .skeleton-box {
+        background: linear-gradient(
+          90deg,
+          #e2e8f0 25%,
+          #f8fafc 50%,
+          #e2e8f0 75%
+        );
+        background-size: 600px 100%;
+        animation: shimmer 1.4s infinite linear;
+      }
+
+      /* Scrollbar Discreta */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #04132e;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #1d5bbf;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #3b82f6;
+      }
+    </style>
+  </head>
+  <body
+    class="world-bg-pattern flex flex-col justify-between min-h-screen select-none sm:select-auto"
+  >
+    <!-- CONTAINER GERAL DA APLICAÇÃO -->
+    <div
+      id="appWrapper"
+      class="w-full max-w-[1380px] mx-auto px-3 sm:px-5 pt-3 pb-4 flex-1 flex flex-col gap-3 transition-all duration-300"
+    >
+      <!-- =========================================================
+         CABEÇALHO PRINCIPAL (GLOBO + TÍTULO + BUSCA + JANELA)
+         ========================================================= -->
+      <header
+        class="relative flex flex-col lg:flex-row items-center justify-between gap-3 py-1 px-2"
+      >
+        <!-- Esquerda: Globo 3D Estilizado + Título ANUÁRIO GLOBAL -->
+        <div class="flex items-center gap-3 sm:gap-4">
+          <!-- Globo Terrestre com Órbita Dourada -->
+          <div
+            class="relative w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 flex items-center justify-center"
+          >
+            <svg
+              viewBox="0 0 120 120"
+              class="w-full h-full drop-shadow-[0_4px_12px_rgba(0,0,0,0.75)]"
+            >
+              <defs>
+                <radialGradient id="oceanGrad" cx="35%" cy="30%" r="70%">
+                  <stop offset="0%" stop-color="#60a5fa" />
+                  <stop offset="45%" stop-color="#1d4ed8" />
+                  <stop offset="100%" stop-color="#071942" />
+                </radialGradient>
+                <linearGradient
+                  id="goldRing"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
+                  <stop offset="0%" stop-color="#fff3a8" />
+                  <stop offset="50%" stop-color="#f59e0b" />
+                  <stop offset="100%" stop-color="#92400e" />
+                </linearGradient>
+                <linearGradient
+                  id="landGrad"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
+                  <stop offset="0%" stop-color="#a3e635" />
+                  <stop offset="60%" stop-color="#22c55e" />
+                  <stop offset="100%" stop-color="#15803d" />
+                </linearGradient>
+              </defs>
+              <!-- Órbita traseira -->
+              <ellipse
+                cx="60"
+                cy="60"
+                rx="54"
+                ry="20"
+                transform="rotate(-24 60 60)"
+                fill="none"
+                stroke="url(#goldRing)"
+                stroke-width="4.5"
+                opacity="0.65"
+              />
+              <!-- Esfera Terrestre -->
+              <circle
+                cx="60"
+                cy="60"
+                r="40"
+                fill="url(#oceanGrad)"
+                stroke="#93c5fd"
+                stroke-width="1.5"
+              />
+              <!-- Continentes estilizados -->
+              <path
+                d="M40,34 C46,31 53,35 55,42 C57,48 51,53 54,59 C58,66 64,69 61,78 C58,85 50,89 47,82 C44,74 46,66 41,60 C35,54 33,40 40,34 Z"
+                fill="url(#landGrad)"
+                opacity="0.92"
+              />
+              <path
+                d="M67,30 C76,29 85,36 86,45 C87,53 79,57 82,65 C84,72 78,80 72,77 C67,74 68,63 65,55 C62,47 61,32 67,30 Z"
+                fill="url(#landGrad)"
+                opacity="0.9"
+              />
+              <!-- Reflexo Specular -->
+              <ellipse
+                cx="47"
+                cy="42"
+                rx="16"
+                ry="10"
+                transform="rotate(-30 47 42)"
+                fill="#ffffff"
+                opacity="0.22"
+              />
+              <!-- Órbita frontal -->
+              <path
+                d="M 11,81 A 54,20 -24 0,0 109,39"
+                fill="none"
+                stroke="url(#goldRing)"
+                stroke-width="5"
+                stroke-linecap="round"
+              />
+              <circle cx="107" cy="40" r="3.5" fill="#fffbeb" />
+            </svg>
+          </div>
+
+          <!-- Bloco Título e Subtítulo -->
+          <div class="text-center sm:text-left">
+            <h1
+              class="title-gold text-2xl sm:text-4xl md:text-[42px] leading-none tracking-wide uppercase"
+            >
+              ANUÁRIO GLOBAL
+            </h1>
+            <div
+              class="flex items-center justify-center sm:justify-start gap-2.5 mt-1.5"
+            >
+              <span
+                class="hidden sm:inline-block h-[1.5px] w-10 bg-gradient-to-r from-transparent via-amber-300 to-amber-400"
+              ></span>
+              <p
+                class="text-white/95 italic font-semibold text-sm sm:text-lg tracking-wide drop-shadow"
+              >
+                O mundo em retrospectiva
+              </p>
+              <span
+                class="hidden sm:inline-block h-[1.5px] w-10 bg-gradient-to-l from-transparent via-amber-300 to-amber-400"
+              ></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Direita: Barra de Pesquisa + Botões de Controle de Janela -->
+        <div
+          class="flex items-center gap-3 w-full lg:w-auto justify-between lg:justify-end"
+        >
+          <!-- Campo de Pesquisa -->
+          <div class="relative flex-1 sm:w-80 md:w-96">
+            <i
+              class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-600 text-base"
+            ></i>
+            <input
+              id="searchInput"
+              type="text"
+              placeholder="Pesquisar notícias..."
+              aria-label="Pesquisar notícias por palavras-chave"
+              class="w-full pl-11 pr-9 py-2 rounded-full bg-white text-slate-800 placeholder-slate-500 font-medium text-sm sm:text-base shadow-[inset_0_2px_5px_rgba(0,0,0,0.25),0_2px_8px_rgba(0,0,0,0.35)] border-2 border-blue-200 focus:border-amber-400 focus:outline-none transition"
+            />
+            <button
+              id="clearSearchBtn"
+              title="Limpar pesquisa"
+              class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 text-sm"
+            >
+              <i class="fa-solid fa-circle-xmark"></i>
+            </button>
+          </div>
+
+          <!-- Botões de Janela (Minimizar, Maximizar/Expandir, Resetar) -->
+          <div class="hidden sm:flex items-center gap-1.5 flex-shrink-0">
+            <button
+              id="btnMinimize"
+              title="Recolher/Expandir Painel"
+              class="win-btn win-btn-blue text-white"
+            >
+              <i class="fa-solid fa-minus text-xs"></i>
+            </button>
+            <button
+              id="btnMaximize"
+              title="Alternar Largura Total"
+              class="win-btn win-btn-blue text-white"
+            >
+              <i class="fa-regular fa-square text-xs"></i>
+            </button>
+            <button
+              id="btnResetView"
+              title="Restaurar Visualização Padrão (2026)"
+              class="win-btn win-btn-red text-white"
+            >
+              <i class="fa-solid fa-xmark text-sm"></i>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- =========================================================
+         ÁREA CENTRAL: SIDEBAR DE ANOS (2026-2020) + PAINEL DE NOTÍCIAS
+         ========================================================= -->
+      <main
+        id="mainPanelContainer"
+        class="grid grid-cols-1 lg:grid-cols-[215px_1fr] gap-3.5 items-stretch flex-1 transition-all duration-300"
+      >
+        <!-- COLUNA ESQUERDA: SELECIONE O ANO -->
+        <aside class="main-window-frame p-3 flex flex-col justify-between">
+          <div>
+            <div
+              class="flex items-center justify-center lg:justify-start gap-2 pb-2.5 mb-2.5 border-b border-blue-300/30"
+            >
+              <i class="fa-regular fa-calendar-days text-amber-300 text-sm"></i>
+              <h2
+                class="text-xs sm:text-[13px] font-extrabold tracking-wider uppercase text-white"
+              >
+                SELECIONE O ANO
+              </h2>
+            </div>
+
+            <!-- Lista de Botões de Anos (Horizontal em mobile/tablet, Vertical em desktop) -->
+            <nav
+              id="yearSelectorList"
+              aria-label="Seleção de anos de 2020 a 2026"
+              class="grid grid-cols-4 sm:grid-cols-7 lg:grid-cols-1 gap-2"
+            >
+              <!-- Renderizado dinamicamente via JS -->
+            </nav>
+          </div>
+
+          <!-- Indicador de Integração Real com API -->
+          <div
+            class="hidden lg:block mt-4 pt-3 border-t border-blue-300/20 text-[11px] text-blue-100/85 leading-snug"
+          >
+            <div
+              class="flex items-center justify-between gap-1 text-emerald-300 font-bold mb-1"
+            >
+              <span class="flex items-center gap-1.5">
+                <span
+                  id="sidebarStatusDot"
+                  class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"
+                ></span>
+                <span id="sidebarProviderLabel">API Conectada</span>
+              </span>
+              <button
+                id="btnOpenApiConfig"
+                title="Configurar Fonte de Notícias / API"
+                class="text-amber-300 hover:text-amber-200 underline text-[10px]"
+              >
+                Configurar
+              </button>
+            </div>
+            <p id="sidebarStatusDesc">
+              Sincronizado em tempo real com fontes jornalísticas e
+              enciclopédicas via REST API.
+            </p>
+          </div>
+        </aside>
+
+        <!-- COLUNA DIREITA: PRINCIPAIS NOTÍCIAS + CARDS + BANNER PUBLICITÁRIO -->
+        <section
+          class="main-window-frame overflow-hidden flex flex-col justify-between"
+        >
+          <!-- Cabeçalho da Área de Notícias -->
+          <div
+            class="section-header-bar px-4 py-2.5 flex flex-wrap items-center justify-between gap-2"
+          >
+            <div class="flex items-center gap-2.5">
+              <i class="fa-solid fa-star text-white text-base drop-shadow"></i>
+              <h2
+                id="sectionHeading"
+                class="font-extrabold text-sm sm:text-lg tracking-wide uppercase text-white drop-shadow"
+              >
+                PRINCIPAIS NOTÍCIAS &bull; 2026
+              </h2>
+              <span
+                id="sourceBadge"
+                class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-extrabold uppercase tracking-wider bg-emerald-400/20 text-emerald-200 border border-emerald-300/40"
+              >
+                <i class="fa-solid fa-satellite-dish text-[10px]"></i>
+                <span id="sourceBadgeText">API REAL CONECTADA</span>
+              </span>
+            </div>
+
+            <div class="flex items-center gap-2 text-xs text-blue-100">
+              <span
+                id="resultsCounter"
+                class="bg-blue-950/60 border border-blue-300/30 px-2.5 py-1 rounded-full font-semibold"
+              >
+                4 matérias em destaque
+              </span>
+              <button
+                id="btnRefreshApi"
+                title="Atualizar notícias da API agora"
+                class="bg-blue-950/70 hover:bg-blue-800 border border-blue-300/35 px-2.5 py-1 rounded-full font-semibold text-white transition flex items-center gap-1.5"
+              >
+                <i
+                  id="refreshIcon"
+                  class="fa-solid fa-rotate text-amber-300"
+                ></i>
+                <span class="hidden sm:inline">Sincronizar</span>
+              </button>
+              <button
+                id="btnConfigApiTop"
+                title="Configurar provedor de API de notícias"
+                class="bg-amber-400/20 hover:bg-amber-400/30 border border-amber-300/45 px-2.5 py-1 rounded-full font-semibold text-amber-200 transition flex items-center gap-1.5"
+              >
+                <i class="fa-solid fa-sliders"></i>
+                <span class="hidden md:inline">Fonte API</span>
+              </button>
+              <button
+                id="btnToggleAllYearsSearch"
+                class="hidden bg-amber-400 text-slate-950 font-bold px-2.5 py-1 rounded-full hover:bg-amber-300 transition"
+              >
+                Buscar em todos os anos
+              </button>
+            </div>
+          </div>
+
+          <!-- Barra de Telemetria / Status da Conexão Real -->
+          <div
+            id="apiTelemetryBar"
+            class="bg-blue-950/60 border-b border-blue-300/20 px-4 py-1.5 flex flex-wrap items-center justify-between gap-2 text-[11px] text-blue-100"
+          >
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-circle-nodes text-emerald-400"></i>
+              <span id="telemetryText"
+                >Conectando aos servidores de notícias em tempo real...</span
+              >
+            </div>
+            <div class="flex items-center gap-3 text-blue-200/80">
+              <span id="telemetryLatency"
+                ><i class="fa-solid fa-bolt text-amber-300 mr-1"></i>-- ms</span
+              >
+              <span
+                id="telemetryEndpoint"
+                class="hidden sm:inline font-mono text-[10px] bg-blue-900/70 px-2 py-0.5 rounded border border-blue-400/25"
+                >Wikipedia PT + Spaceflight News API</span
+              >
+            </div>
+          </div>
+
+          <!-- Conteúdo das Notícias -->
+          <div class="p-3.5 sm:p-4 flex flex-col gap-3.5 flex-1">
+            <!-- CARD DE DESTAQUE PRINCIPAL (HERO) -->
+            <article
+              id="featuredNewsContainer"
+              class="news-card-white rounded-xl overflow-hidden text-slate-800 cursor-pointer group"
+            >
+              <!-- Renderizado via JS -->
+            </article>
+
+            <!-- GRADE DE 3 CARDS SECUNDÁRIOS -->
+            <div
+              id="secondaryNewsGrid"
+              class="grid grid-cols-1 md:grid-cols-3 gap-3.5"
+            >
+              <!-- Renderizado via JS -->
+            </div>
+
+            <!-- BANNER ESPAÇO PUBLICITÁRIO -->
+            <div
+              class="ad-banner-bg rounded-xl px-4 sm:px-6 py-3 flex flex-col sm:flex-row items-center justify-between gap-3 relative overflow-hidden mt-auto"
+            >
+              <!-- Silhueta de Prédios Decorativa ao Fundo -->
+              <div
+                class="pointer-events-none absolute right-2 bottom-0 opacity-15 text-blue-200 text-5xl flex items-end gap-1"
+              >
+                <i class="fa-solid fa-building"></i>
+                <i class="fa-solid fa-city"></i>
+                <i class="fa-solid fa-tower-observation"></i>
+              </div>
+
+              <!-- Esquerda: Megafone + Chamada -->
+              <div
+                class="flex items-center gap-3.5 z-10 text-center sm:text-left"
+              >
+                <div
+                  class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-blue-950/70 border border-amber-300/40 flex items-center justify-center flex-shrink-0 shadow-inner"
+                >
+                  <i
+                    class="fa-solid fa-bullhorn text-2xl sm:text-3xl text-amber-400 -rotate-12 drop-shadow"
+                  ></i>
+                </div>
+                <div>
+                  <h3
+                    class="font-black text-base sm:text-xl tracking-wide uppercase text-white leading-tight drop-shadow"
+                  >
+                    ESPAÇO PUBLICITÁRIO
+                  </h3>
+                  <p
+                    class="text-amber-300 italic font-bold text-sm sm:text-base"
+                  >
+                    Divulgue sua marca no Anuário Global
+                  </p>
+                </div>
+              </div>
+
+              <!-- Direita: Botão Dourado ANUNCIE AQUI -->
+              <button
+                id="btnAdvertise"
+                class="btn-anuncie z-10 px-6 py-2.5 rounded-full font-black text-sm sm:text-base uppercase tracking-wider flex items-center gap-2 cursor-pointer flex-shrink-0"
+              >
+                <span>ANUNCIE AQUI</span>
+                <i class="fa-solid fa-angles-right"></i>
+              </button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- =========================================================
+       RODAPÉ FIXO: PLAYER RÁDIO WEB SUPER CRYSTAL + COPYRIGHT
+       ========================================================= -->
+    <footer class="radio-footer-bar w-full mt-2">
+      <!-- Elemento de Áudio Real do Streaming Zeno.fm -->
+      <audio id="radioStreamAudio" preload="none" crossorigin="anonymous">
+        <source src="https://stream.zeno.fm/ovjrbttvetevv" type="audio/mpeg" />
+      </audio>
+
+      <div
+        class="max-w-[1380px] mx-auto px-3 sm:px-5 py-2.5 flex flex-col lg:flex-row items-center justify-between gap-3"
+      >
+        <!-- Identidade da Rádio Web SUPER CRYSTAL -->
+        <div class="flex items-center gap-3">
+          <!-- Equalizador Visual -->
+          <div
+            id="eqVisualizer"
+            class="eq-paused flex items-end gap-1 h-8 px-2 py-1 rounded bg-blue-950/80 border border-blue-400/30"
+          >
+            <span
+              class="eq-bar w-1.5 h-6 bg-amber-400 rounded-t"
+              style="animation-delay: 0s"
+            ></span>
+            <span
+              class="eq-bar w-1.5 h-4 bg-amber-300 rounded-t"
+              style="animation-delay: 0.2s"
+            ></span>
+            <span
+              class="eq-bar w-1.5 h-7 bg-amber-400 rounded-t"
+              style="animation-delay: 0.4s"
+            ></span>
+            <span
+              class="eq-bar w-1.5 h-5 bg-amber-300 rounded-t"
+              style="animation-delay: 0.1s"
+            ></span>
+            <span
+              class="eq-bar w-1.5 h-6 bg-amber-400 rounded-t"
+              style="animation-delay: 0.3s"
+            ></span>
+          </div>
+
+          <div class="leading-tight">
+            <div
+              class="text-[11px] font-bold tracking-widest uppercase text-blue-200"
+            >
+              RÁDIO WEB
+            </div>
+            <div
+              class="text-base sm:text-lg font-black tracking-wide uppercase text-white"
+            >
+              SUPER CRYSTAL
+            </div>
+          </div>
+
+          <div class="hidden sm:block h-8 w-[1px] bg-blue-300/30 mx-1"></div>
+        </div>
+
+        <!-- Controles centrais de Reprodução, Barra de Progresso e Volume -->
+        <div
+          class="flex flex-wrap sm:flex-nowrap items-center justify-center gap-3 sm:gap-4 flex-1 w-full lg:w-auto"
+        >
+          <!-- Botão Play / Pause -->
+          <button
+            id="radioPlayBtn"
+            aria-label="Reproduzir ou pausar Rádio Web Super Crystal"
+            class="w-11 h-11 rounded-full bg-gradient-to-b from-blue-400 to-blue-700 hover:from-amber-300 hover:to-amber-500 text-white hover:text-slate-950 border-2 border-white shadow-[0_0_15px_rgba(59,130,246,0.75)] flex items-center justify-center transition-all flex-shrink-0 cursor-pointer"
+          >
+            <i id="radioPlayIcon" class="fa-solid fa-play text-base ml-0.5"></i>
+          </button>
+
+          <!-- Barra de Progresso / Transmissão + Tempo -->
+          <div class="flex items-center gap-2.5 flex-1 min-w-[160px] max-w-md">
+            <div
+              class="w-full h-2.5 bg-blue-950 rounded-full border border-blue-400/40 overflow-hidden p-[1px]"
+            >
+              <div
+                id="radioProgressFill"
+                class="h-full w-1/3 rounded-full bg-gradient-to-r from-cyan-400 via-blue-400 to-amber-300 transition-all duration-300"
+              ></div>
+            </div>
+            <span
+              id="radioTimer"
+              class="text-xs font-mono font-semibold text-blue-100 whitespace-nowrap"
+            >
+              00:00 / AO VIVO
+            </span>
+          </div>
+
+          <!-- Controle de Volume -->
+          <div class="flex items-center gap-2 min-w-[125px]">
+            <button
+              id="radioMuteBtn"
+              title="Silenciar / Ativar som"
+              class="text-white hover:text-amber-300 transition w-6 text-center"
+            >
+              <i
+                id="radioVolumeIcon"
+                class="fa-solid fa-volume-high text-base"
+              ></i>
+            </button>
+            <input
+              id="radioVolumeSlider"
+              type="range"
+              min="0"
+              max="100"
+              value="75"
+              aria-label="Controle de volume da Rádio Web Super Crystal"
+              class="radio-slider w-24 sm:w-28"
+            />
+          </div>
+
+          <!-- Selo AO VIVO -->
+          <div
+            id="liveBadge"
+            class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-950/90 border border-red-500/60 text-xs font-extrabold tracking-wider uppercase text-white shadow"
+          >
+            <span
+              id="liveDot"
+              class="w-2.5 h-2.5 rounded-full bg-red-500"
+            ></span>
+            <span>AO VIVO</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Linha de Copyright Oficial -->
+      <div
+        class="bg-[#030e24] border-t border-blue-400/20 py-1.5 px-4 text-center text-xs text-blue-100/90 font-medium"
+      >
+        Copyright 2026 ANUÁRIO GLOBAL — Desenvolvido por José Cruz. Todos os
+        Direitos Reservados.
+      </div>
+    </footer>
+
+    <!-- =========================================================
+       MODAL 1: JANELA DE LEITURA COMPLETA DA NOTÍCIA
+       ========================================================= -->
+    <div
+      id="newsModal"
+      class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/80 backdrop-blur-sm p-3 sm:p-5"
+    >
+      <div
+        class="bg-white text-slate-800 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-hidden shadow-2xl border-2 border-blue-300 flex flex-col animate-[fadeIn_0.2s_ease-out]"
+      >
+        <!-- Barra Superior do Modal -->
+        <div
+          class="section-header-bar px-5 py-3 flex items-center justify-between text-white"
+        >
+          <div
+            class="flex items-center gap-2 text-xs sm:text-sm font-bold uppercase tracking-wider"
+          >
+            <i class="fa-solid fa-newspaper text-amber-300"></i>
+            <span id="modalCategoryYear">MUNDO &bull; 2026</span>
+          </div>
+          <button
+            id="closeNewsModal"
+            class="win-btn win-btn-red text-white"
+            title="Fechar leitura"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <!-- Conteúdo Rolável da Matéria -->
+        <div class="overflow-y-auto p-5 sm:p-7 space-y-4">
+          <div
+            class="relative rounded-xl overflow-hidden h-52 sm:h-72 bg-slate-200 border border-slate-200"
+          >
+            <img
+              id="modalImage"
+              src=""
+              alt=""
+              class="w-full h-full object-cover"
+            />
+            <span
+              id="modalDateBadge"
+              class="absolute bottom-3 left-3 bg-blue-950/90 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow"
+            >
+              <i class="fa-regular fa-calendar mr-1.5 text-amber-300"></i
+              >31/12/2026
+            </span>
+            <span
+              id="modalSourceTag"
+              class="absolute top-3 right-3 bg-emerald-600/95 text-white text-[11px] font-bold px-3 py-1 rounded-full shadow"
+            >
+              Fonte API
+            </span>
+          </div>
+
+          <h2
+            id="modalTitle"
+            class="text-xl sm:text-3xl font-extrabold text-slate-900 leading-tight"
+          >
+            Título da Notícia
+          </h2>
+
+          <p
+            id="modalSummary"
+            class="text-base sm:text-lg font-semibold text-blue-900 border-l-4 border-amber-400 pl-3.5 py-0.5 bg-blue-50/70 rounded-r"
+          >
+            Resumo da matéria.
+          </p>
+
+          <div
+            id="modalBody"
+            class="space-y-3.5 text-slate-700 text-sm sm:text-base leading-relaxed"
+          >
+            <!-- Parágrafos completos -->
+          </div>
+
+          <!-- Rodapé com Link da Fonte Original da API -->
+          <div
+            class="pt-3 border-t border-slate-200 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500"
+          >
+            <span id="modalProviderFooter">
+              <i class="fa-solid fa-globe text-blue-600 mr-1"></i>
+              Conteúdo obtido via integração REST API em tempo real.
+            </span>
+            <div class="flex items-center gap-3">
+              <a
+                id="modalOriginalUrl"
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-700 hover:bg-blue-800 text-white font-bold transition"
+              >
+                <span>Ler na Fonte Original</span>
+                <i
+                  class="fa-solid fa-arrow-up-right-from-square text-[10px]"
+                ></i>
+              </a>
+              <button
+                id="btnShareNews"
+                class="text-blue-700 hover:text-blue-900 font-bold flex items-center gap-1.5"
+              >
+                <i class="fa-solid fa-share-nodes"></i> Copiar link
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================
+       MODAL 2: CONFIGURAÇÃO DA API DE NOTÍCIAS (MULTI-PROVEDOR)
+       ========================================================= -->
+    <div
+      id="apiConfigModal"
+      class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/80 backdrop-blur-sm p-3 sm:p-5"
+    >
+      <div class="main-window-frame max-w-xl w-full overflow-hidden text-white">
+        <div
+          class="section-header-bar px-5 py-3.5 flex items-center justify-between"
+        >
+          <div
+            class="flex items-center gap-2 font-extrabold uppercase tracking-wide text-sm sm:text-base"
+          >
+            <i class="fa-solid fa-plug-circle-check text-emerald-300"></i>
+            <span>Conexão com API Real de Notícias</span>
+          </div>
+          <button
+            id="closeApiConfigModal"
+            class="win-btn win-btn-red text-white"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <form id="apiConfigForm" class="p-5 sm:p-6 space-y-4 text-sm">
+          <p class="text-blue-100 leading-relaxed">
+            O portal está conectado por padrão às APIs públicas abertas
+            <strong>Wikipedia PT API</strong> e
+            <strong>Spaceflight News API v4</strong> (sem necessidade de chave).
+            Caso deseje conectar sua chave comercial (GNews, NewsAPI.org ou
+            Endpoint próprio), configure abaixo:
+          </p>
+
+          <div>
+            <label class="block text-xs font-bold uppercase text-amber-300 mb-1"
+              >Provedor de Notícias Ativo</label
+            >
+            <select
+              id="apiProviderSelect"
+              class="w-full px-3.5 py-2.5 rounded-lg bg-blue-950/90 border border-blue-300/40 text-white focus:border-amber-400 focus:outline-none"
+            >
+              <option value="open_live">
+                Padrão Aberto (Wikipedia PT + Spaceflight News API v4)
+              </option>
+              <option value="gnews">
+                GNews API v4 (gnews.io — requer API Key)
+              </option>
+              <option value="newsapi">
+                NewsAPI.org v2 (newsapi.org — requer API Key)
+              </option>
+              <option value="custom">Endpoint REST Personalizado (JSON)</option>
+            </select>
+          </div>
+
+          <div id="apiKeyGroup" class="hidden space-y-3">
+            <div>
+              <label
+                class="block text-xs font-bold uppercase text-amber-300 mb-1"
+                >Chave de API (API Key / Token)</label
+              >
+              <input
+                id="apiKeyInput"
+                type="password"
+                placeholder="Cole sua API Key aqui..."
+                class="w-full px-3.5 py-2 rounded-lg bg-blue-950/90 border border-blue-300/40 text-white placeholder-blue-300/50 focus:border-amber-400 focus:outline-none"
+              />
+            </div>
+            <div id="customEndpointGroup" class="hidden">
+              <label
+                class="block text-xs font-bold uppercase text-amber-300 mb-1"
+                >URL do Endpoint REST (use {year} e {query})</label
+              >
+              <input
+                id="customUrlInput"
+                type="url"
+                placeholder="https://sua-api.com/v1/news?year={year}&q={query}"
+                class="w-full px-3.5 py-2 rounded-lg bg-blue-950/90 border border-blue-300/40 text-white placeholder-blue-300/50 focus:border-amber-400 focus:outline-none"
+              />
+            </div>
+          </div>
+
+          <div
+            class="bg-blue-950/70 border border-blue-400/30 rounded-lg p-3 text-xs text-blue-100 space-y-1"
+          >
+            <div class="font-bold text-amber-300">
+              <i class="fa-solid fa-shield-halved mr-1"></i>Resiliência e Cache
+              Inteligente
+            </div>
+            <p>
+              Todas as respostas da API são armazenadas em cache na sessão atual
+              para navegação instantânea entre 2020 e 2026, com fallback
+              automático caso ocorra falha de rede.
+            </p>
+          </div>
+
+          <div class="pt-2 flex flex-wrap items-center justify-between gap-2">
+            <button
+              type="button"
+              id="btnClearApiCache"
+              class="px-4 py-2 rounded-lg bg-blue-900/80 hover:bg-blue-800 border border-blue-300/30 text-xs font-bold text-blue-100 cursor-pointer"
+            >
+              <i class="fa-solid fa-trash-can mr-1"></i> Limpar Cache
+            </button>
+            <div class="flex items-center gap-2">
+              <button
+                type="button"
+                id="cancelApiConfigBtn"
+                class="px-4 py-2 rounded-lg bg-blue-900/70 hover:bg-blue-800 text-xs font-bold cursor-pointer"
+              >
+                Cancelar
+              </button>
+              <button
+                type="submit"
+                class="btn-anuncie px-5 py-2 rounded-lg font-black text-xs uppercase tracking-wider cursor-pointer"
+              >
+                Salvar e Conectar
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- =========================================================
+       MODAL 3: FORMULÁRIO PARA ANUNCIANTES (ESPAÇO PUBLICITÁRIO)
+       ========================================================= -->
+    <div
+      id="adModal"
+      class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/80 backdrop-blur-sm p-3 sm:p-5"
+    >
+      <div class="main-window-frame max-w-lg w-full overflow-hidden text-white">
+        <div
+          class="section-header-bar px-5 py-3.5 flex items-center justify-between"
+        >
+          <div
+            class="flex items-center gap-2 font-extrabold uppercase tracking-wide text-sm sm:text-base"
+          >
+            <i class="fa-solid fa-bullhorn text-amber-300"></i>
+            <span>Anuncie no Anuário Global</span>
+          </div>
+          <button id="closeAdModal" class="win-btn win-btn-red text-white">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <form id="adForm" class="p-5 sm:p-6 space-y-4">
+          <p class="text-sm text-blue-100">
+            Destaque sua marca, empresa ou evento na retrospectiva anual e nas
+            transmissões integradas com a
+            <strong>Rádio Web Super Crystal</strong>.
+          </p>
+
+          <div>
+            <label class="block text-xs font-bold uppercase text-amber-300 mb-1"
+              >Nome / Empresa</label
+            >
+            <input
+              required
+              type="text"
+              placeholder="Ex: Grupo Empresarial Amazônia"
+              class="w-full px-3.5 py-2 rounded-lg bg-blue-950/80 border border-blue-300/40 text-white placeholder-blue-300/50 focus:border-amber-400 focus:outline-none text-sm"
+            />
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label
+                class="block text-xs font-bold uppercase text-amber-300 mb-1"
+                >E-mail Corporativo</label
+              >
+              <input
+                required
+                type="email"
+                placeholder="contato@empresa.com.br"
+                class="w-full px-3.5 py-2 rounded-lg bg-blue-950/80 border border-blue-300/40 text-white placeholder-blue-300/50 focus:border-amber-400 focus:outline-none text-sm"
+              />
+            </div>
+            <div>
+              <label
+                class="block text-xs font-bold uppercase text-amber-300 mb-1"
+                >WhatsApp / Telefone</label
+              >
+              <input
+                required
+                type="tel"
+                placeholder="(91) 99999-0000"
+                class="w-full px-3.5 py-2 rounded-lg bg-blue-950/80 border border-blue-300/40 text-white placeholder-blue-300/50 focus:border-amber-400 focus:outline-none text-sm"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold uppercase text-amber-300 mb-1"
+              >Formato de Mídia</label
+            >
+            <select
+              class="w-full px-3.5 py-2 rounded-lg bg-blue-950/80 border border-blue-300/40 text-white focus:border-amber-400 focus:outline-none text-sm"
+            >
+              <option>Banner Principal + Spot Rádio Web Super Crystal</option>
+              <option>Banner Destaque Anuário (2020–2026)</option>
+              <option>Patrocínio Master da Edição Anual</option>
+            </select>
+          </div>
+
+          <div class="pt-2 flex justify-end gap-2.5">
+            <button
+              type="button"
+              id="cancelAdBtn"
+              class="px-4 py-2 rounded-lg bg-blue-900/70 hover:bg-blue-800 text-sm font-semibold"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              class="btn-anuncie px-5 py-2 rounded-lg font-black text-sm uppercase tracking-wider cursor-pointer"
+            >
+              Enviar Proposta
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- TOAST DE NOTIFICAÇÃO -->
+    <div
+      id="toastNotification"
+      class="fixed bottom-20 right-4 z-50 hidden items-center gap-2.5 bg-slate-900/95 border border-amber-400 text-white px-4 py-3 rounded-xl shadow-2xl text-sm font-semibold"
+    >
+      <i class="fa-solid fa-circle-check text-amber-400 text-base"></i>
+      <span id="toastMessage">Ação concluída!</span>
+    </div>
+
+    <!-- =========================================================
+       JAVASCRIPT: INTEGRAÇÃO COM API REAL + FALLBACK + RÁDIO WEB
+       ========================================================= -->
+    <script>
+      // =========================================================================
+      // 1. GERADOR DE FALLBACK VISUAL SVG (GARANTE ZERO IMAGENS QUEBRADAS)
+      // =========================================================================
+      function createFallbackSvg(title, category, year) {
+        const safeTitle = (title || "Anuário Global")
+          .slice(0, 42)
+          .replace(/[<>&'"]/g, "");
+        const safeCat = (category || "Retrospectiva")
+          .slice(0, 26)
+          .replace(/[<>&'"]/g, "");
+        const svg = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+          <defs>
+            <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#0b2e6b"/>
+              <stop offset="55%" stop-color="#1557b8"/>
+              <stop offset="100%" stop-color="#061738"/>
+            </linearGradient>
+          </defs>
+          <rect width="800" height="450" fill="url(#g)"/>
+          <circle cx="670" cy="110" r="160" fill="none" stroke="#60a5fa" stroke-opacity="0.22" stroke-width="2"/>
+          <circle cx="670" cy="110" r="110" fill="none" stroke="#fbbf24" stroke-opacity="0.28" stroke-width="2"/>
+          <rect x="44" y="44" rx="14" width="150" height="32" fill="#f59e0b"/>
+          <text x="119" y="65" font-family="sans-serif" font-weight="800" font-size="14" fill="#0f172a" text-anchor="middle">${year} • API</text>
+          <text x="44" y="235" font-family="sans-serif" font-weight="800" font-size="28" fill="#ffffff">${safeTitle}</text>
+          <text x="44" y="275" font-family="sans-serif" font-weight="600" font-size="18" fill="#fde68a">${safeCat}</text>
+          <text x="44" y="405" font-family="sans-serif" font-weight="700" font-size="13" fill="#93c5fd">ANUÁRIO GLOBAL — O MUNDO EM RETROSPECTIVA</text>
+        </svg>`;
+        return "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
+      }
+
+      // =========================================================================
+      // 2. ACERVO DE BACKUP OFFLINE (2020–2026) CASO A REDE ESTEJA INDISPONÍVEL
+      // =========================================================================
+      const FALLBACK_NEWS_DATA = {
+        2026: [
+          {
+            id: "2026-hero",
+            featured: true,
+            title: "Os acontecimentos que marcaram o mundo",
+            summary:
+              "Conflitos, avanços tecnológicos, decisões históricas e grandes eventos marcaram o cenário internacional em 2026, um ano de mudanças e desafios globais.",
+            date: "31/12/2026",
+            category: "Mundo",
+            icon: "fa-solid fa-globe",
+            image:
+              "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=1000&q=80",
+            sourceName: "Anuário Global Archive",
+            sourceUrl: "https://pt.wikipedia.org/wiki/2026",
+            content: [
+              "O ano de 2026 consolidou uma nova etapa nas relações diplomáticas e na cooperação multilateral. Em assembleias extraordinárias, líderes mundiais debateram protocolos de segurança digital, transição energética e estabilidade econômica.",
+              "Na esfera científica e tecnológica, a inteligência artificial aplicada à medicina de precisão e às energias limpas acelerou soluções antes previstas apenas para a próxima década.",
+              "Simultaneamente, grandes eventos culturais e esportivos mobilizaram bilhões de espectadores, reforçando o papel da integração internacional.",
+            ],
+          },
+          {
+            id: "2026-1",
+            featured: false,
+            title: "Nova missão espacial amplia fronteiras da ciência",
+            summary:
+              "Lançamento de foguete de nova geração leva módulos laboratoriais e sensores climáticos de alta precisão para a órbita terrestre.",
+            date: "20/07/2026",
+            category: "Ciência e Tecnologia",
+            icon: "fa-solid fa-rocket",
+            image:
+              "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=700&q=80",
+            sourceName: "Spaceflight Archive",
+            sourceUrl: "https://www.nasa.gov/",
+            content: [
+              "A nova missão orbital de 2026 representou um marco na engenharia aeroespacial reutilizável, reduzindo custos de lançamento e ampliando a capacidade de carga científica.",
+              "Os equipamentos embarcados monitoram correntes oceânicas, umidade atmosférica e radiação solar em tempo real.",
+            ],
+          },
+          {
+            id: "2026-2",
+            featured: false,
+            title: "Grandes competições esportivas mobilizam o planeta",
+            summary:
+              "Torneios internacionais reúnem delegações de todos os continentes com recordes de audiência e inovação em arenas sustentáveis.",
+            date: "15/07/2026",
+            category: "Esportes",
+            icon: "fa-solid fa-trophy",
+            image:
+              "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=700&q=80",
+            sourceName: "Esporte Mundial",
+            sourceUrl: "https://olympics.com/",
+            content: [
+              "O calendário esportivo de 2026 destacou-se pela integração entre arenas de baixo impacto ambiental e transmissões interativas em ultra-definição.",
+              "Atletas de dezenas de países quebraram marcas históricas em provas de atletismo, natação e esportes coletivos.",
+            ],
+          },
+          {
+            id: "2026-3",
+            featured: false,
+            title: "Amazônia ganha novo plano de preservação",
+            summary:
+              "Acordo internacional destina recursos para monitoramento por satélite, bioeconomia e fortalecimento das comunidades florestais.",
+            date: "10/06/2026",
+            category: "Meio Ambiente",
+            icon: "fa-solid fa-leaf",
+            image:
+              "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=700&q=80",
+            sourceName: "Observatório Ambiental",
+            sourceUrl: "https://pt.wikipedia.org/wiki/Amaz%C3%B4nia",
+            content: [
+              "O plano integrado de preservação amazônica estabeleceu metas rigorosas de desmatamento zero e rastreabilidade ambiental.",
+              "Projetos de bioeconomia sustentável e pesquisa farmacêutica fortalecem a geração de renda local aliada à conservação.",
+            ],
+          },
+        ],
+        2025: [
+          {
+            id: "2025-hero",
+            featured: true,
+            title:
+              "Cúpula climática e avanço da energia limpa redefinem metas globais",
+            summary:
+              "Nações signatárias firmam compromissos inéditos de descarbonização, financiamento verde e proteção da biodiversidade em 2025.",
+            date: "18/11/2025",
+            category: "Mundo",
+            icon: "fa-solid fa-globe",
+            image:
+              "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1000&q=80",
+            sourceName: "Anuário Global Archive",
+            sourceUrl: "https://pt.wikipedia.org/wiki/2025",
+            content: [
+              "Em 2025, os debates ambientais ganharam protagonismo histórico com o avanço das matrizes solares e eólicas no balanço energético mundial.",
+              "O financiamento climático voltado a países em desenvolvimento e florestas tropicais entrou no centro das decisões econômicas.",
+            ],
+          },
+          {
+            id: "2025-1",
+            featured: false,
+            title: "Computação quântica atinge novo patamar de estabilidade",
+            summary:
+              "Pesquisadores demonstram processadores com correção de erros capaz de acelerar simulações moleculares.",
+            date: "14/09/2025",
+            category: "Ciência e Tecnologia",
+            icon: "fa-solid fa-microchip",
+            image:
+              "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=700&q=80",
+            sourceName: "Tech Review",
+            sourceUrl:
+              "https://pt.wikipedia.org/wiki/Computa%C3%A7%C3%A3o_qu%C3%A2ntica",
+            content: [
+              "Avanços em qubits lógicos permitiram executar algoritmos complexos de química computacional em frações de segundo.",
+            ],
+          },
+          {
+            id: "2025-2",
+            featured: false,
+            title: "Expansão do futebol feminino quebra recordes de público",
+            summary:
+              "Torneios continentais e ligas nacionais registram estádios lotados e crescimento histórico nas transmissões.",
+            date: "03/08/2025",
+            category: "Esportes",
+            icon: "fa-solid fa-trophy",
+            image:
+              "https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=700&q=80",
+            sourceName: "Esporte Mundial",
+            sourceUrl: "https://pt.wikipedia.org/wiki/Futebol_feminino",
+            content: [
+              "A profissionalização e o investimento em categorias de base impulsionaram o crescimento da modalidade em 2025.",
+            ],
+          },
+          {
+            id: "2025-3",
+            featured: false,
+            title: "Reflorestamento urbano reduz ilhas de calor em metrópoles",
+            summary:
+              "Corredores verdes e parques lineares melhoram a qualidade do ar e o conforto térmico em grandes cidades.",
+            date: "22/04/2025",
+            category: "Meio Ambiente",
+            icon: "fa-solid fa-leaf",
+            image:
+              "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=700&q=80",
+            sourceName: "Observatório Ambiental",
+            sourceUrl: "https://pt.wikipedia.org/wiki/Reflorestamento",
+            content: [
+              "Projetos de arborização urbana reduziram em até 3°C a temperatura média em bairros densamente povoados.",
+            ],
+          },
+        ],
+        2024: [
+          {
+            id: "2024-hero",
+            featured: true,
+            title:
+              "Ano eleitoral histórico mobiliza mais da metade da população mundial",
+            summary:
+              "Mais de 70 países realizaram eleições em 2024, testando a resiliência das instituições democráticas e o impacto das redes digitais.",
+            date: "15/12/2024",
+            category: "Mundo",
+            icon: "fa-solid fa-globe",
+            image:
+              "https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?auto=format&fit=crop&w=1000&q=80",
+            sourceName: "Anuário Global Archive",
+            sourceUrl: "https://pt.wikipedia.org/wiki/2024",
+            content: [
+              "O calendário eleitoral de 2024 foi o maior da história contemporânea, envolvendo bilhões de eleitores em todos os continentes.",
+            ],
+          },
+          {
+            id: "2024-1",
+            featured: false,
+            title: "Sondas lunares ampliam mapeamento do polo sul da Lua",
+            summary:
+              "Missões robóticas identificam reservas de gelo e testam tecnologias para futuras bases permanentes.",
+            date: "23/08/2024",
+            category: "Ciência e Tecnologia",
+            icon: "fa-solid fa-rocket",
+            image:
+              "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=700&q=80",
+            sourceName: "Spaceflight Archive",
+            sourceUrl:
+              "https://pt.wikipedia.org/wiki/Explora%C3%A7%C3%A3o_da_Lua",
+            content: [
+              "A exploração lunar ganhou novo impulso em 2024 com missões de pouso de precisão no polo sul selênico.",
+            ],
+          },
+          {
+            id: "2024-2",
+            featured: false,
+            title:
+              "Jogos Olímpicos de Paris celebram esporte e patrimônio histórico",
+            summary:
+              "Cerimônia no Rio Sena e competições junto a monumentos icônicos marcaram a edição de 2024.",
+            date: "11/08/2024",
+            category: "Esportes",
+            icon: "fa-solid fa-trophy",
+            image:
+              "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=700&q=80",
+            sourceName: "Esporte Mundial",
+            sourceUrl:
+              "https://pt.wikipedia.org/wiki/Jogos_Ol%C3%ADmpicos_de_Ver%C3%A3o_de_2024",
+            content: [
+              "Paris 2024 marcou a história olímpica pela igualdade numérica entre atletas homens e mulheres.",
+            ],
+          },
+          {
+            id: "2024-3",
+            featured: false,
+            title: "Eventos climáticos extremos aceleram planos de adaptação",
+            summary:
+              "Sistemas de alerta precoce e infraestrutura resiliente tornam-se prioridade para governos e municípios.",
+            date: "05/06/2024",
+            category: "Meio Ambiente",
+            icon: "fa-solid fa-leaf",
+            image:
+              "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=700&q=80",
+            sourceName: "Observatório Ambiental",
+            sourceUrl: "https://pt.wikipedia.org/wiki/Mudan%C3%A7a_do_clima",
+            content: [
+              "O ano de 2024 evidenciou a urgência de investimentos em drenagem urbana e monitoramento meteorológico.",
+            ],
+          },
+        ],
+        2023: [
+          {
+            id: "2023-hero",
+            featured: true,
+            title:
+              "Revolução da Inteligência Artificial Generativa transforma setores globais",
+            summary:
+              "Ferramentas de linguagem natural e visão computacional passam a integrar rotinas produtivas, educacionais e científicas em 2023.",
+            date: "20/12/2023",
+            category: "Mundo",
+            icon: "fa-solid fa-globe",
+            image:
+              "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1000&q=80",
+            sourceName: "Anuário Global Archive",
+            sourceUrl: "https://pt.wikipedia.org/wiki/2023",
+            content: [
+              "Em 2023, a popularização dos grandes modelos de linguagem inaugurou uma nova era na interação humano-computador.",
+            ],
+          },
+          {
+            id: "2023-1",
+            featured: false,
+            title:
+              "Telescópio James Webb revela galáxias primordiais do universo",
+            summary:
+              "Imagens infravermelhas de altíssima resolução reescrevem modelos sobre a formação das primeiras estrelas.",
+            date: "12/07/2023",
+            category: "Ciência e Tecnologia",
+            icon: "fa-solid fa-rocket",
+            image:
+              "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=700&q=80",
+            sourceName: "Spaceflight Archive",
+            sourceUrl:
+              "https://pt.wikipedia.org/wiki/Telesc%C3%B3pio_Espacial_James_Webb",
+            content: [
+              "As observações do James Webb permitiram analisar atmosferas de exoplanetas distantes com precisão inédita.",
+            ],
+          },
+          {
+            id: "2023-2",
+            featured: false,
+            title:
+              "Copa do Mundo Feminina na Austrália e Nova Zelândia bate recordes",
+            summary:
+              "Competição reuniu 32 seleções pela primeira vez e levou quase dois milhões de torcedores aos estádios.",
+            date: "20/08/2023",
+            category: "Esportes",
+            icon: "fa-solid fa-trophy",
+            image:
+              "https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=700&q=80",
+            sourceName: "Esporte Mundial",
+            sourceUrl:
+              "https://pt.wikipedia.org/wiki/Copa_do_Mundo_de_Futebol_Feminino_de_2023",
+            content: [
+              "A edição de 2023 consolidou o futebol feminino como um dos maiores espetáculos esportivos do planeta.",
+            ],
+          },
+          {
+            id: "2023-3",
+            featured: false,
+            title: "Tratado Global dos Oceanos é aprovado na ONU",
+            summary:
+              "Acordo histórico estabelece mecanismos jurídicos para proteger 30% das águas internacionais até 2030.",
+            date: "04/03/2023",
+            category: "Meio Ambiente",
+            icon: "fa-solid fa-leaf",
+            image:
+              "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=700&q=80",
+            sourceName: "Observatório Ambiental",
+            sourceUrl: "https://pt.wikipedia.org/wiki/Oceano",
+            content: [
+              "Após anos de negociações, o Tratado do Alto-Mar criou áreas marinhas protegidas fora das jurisdições nacionais.",
+            ],
+          },
+        ],
+        2022: [
+          {
+            id: "2022-hero",
+            featured: true,
+            title:
+              "Mundo atinge a marca de 8 bilhões de habitantes e enfrenta novos desafios",
+            summary:
+              "Crescimento demográfico, tensões geopolíticas e reorganização das cadeias globais de suprimentos marcaram o ano de 2022.",
+            date: "15/11/2022",
+            category: "Mundo",
+            icon: "fa-solid fa-globe",
+            image:
+              "https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=1000&q=80",
+            sourceName: "Anuário Global Archive",
+            sourceUrl: "https://pt.wikipedia.org/wiki/2022",
+            content: [
+              "Em novembro de 2022, a população mundial alcançou 8 bilhões de pessoas, impulsionada pelos avanços na saúde pública.",
+            ],
+          },
+          {
+            id: "2022-1",
+            featured: false,
+            title: "Missão Artemis I inaugura retorno humano ao entorno lunar",
+            summary:
+              "Voo não tripulado da cápsula Orion contornou a Lua e validou sistemas críticos para futuras missões.",
+            date: "16/11/2022",
+            category: "Ciência e Tecnologia",
+            icon: "fa-solid fa-rocket",
+            image:
+              "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=700&q=80",
+            sourceName: "Spaceflight Archive",
+            sourceUrl: "https://pt.wikipedia.org/wiki/Artemis_1",
+            content: [
+              "A missão Artemis I testou com sucesso o foguete SLS e o escudo térmico da nave Orion.",
+            ],
+          },
+          {
+            id: "2022-2",
+            featured: false,
+            title: "Copa do Mundo de 2022 encerra com final histórica no Catar",
+            summary:
+              "Primeira edição realizada no Oriente Médio destacou-se pela tecnologia semiautomática e partidas memoráveis.",
+            date: "18/12/2022",
+            category: "Esportes",
+            icon: "fa-solid fa-trophy",
+            image:
+              "https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=700&q=80",
+            sourceName: "Esporte Mundial",
+            sourceUrl:
+              "https://pt.wikipedia.org/wiki/Copa_do_Mundo_FIFA_de_2022",
+            content: [
+              "A final entre Argentina e França foi amplamente celebrada como uma das mais emocionantes da história.",
+            ],
+          },
+          {
+            id: "2022-3",
+            featured: false,
+            title:
+              "Acordo Kunming-Montreal estabelece marco pela biodiversidade",
+            summary:
+              "Nações definem metas globais para restaurar ecossistemas degradados e proteger espécies ameaçadas.",
+            date: "19/12/2022",
+            category: "Meio Ambiente",
+            icon: "fa-solid fa-leaf",
+            image:
+              "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=700&q=80",
+            sourceName: "Observatório Ambiental",
+            sourceUrl: "https://pt.wikipedia.org/wiki/Biodiversidade",
+            content: [
+              "A COP15 da Biodiversidade firmou compromissos concretos de conservação terrestre e marinha.",
+            ],
+          },
+        ],
+        2021: [
+          {
+            id: "2021-hero",
+            featured: true,
+            title:
+              "Campanhas globais de vacinação impulsionam retomada econômica e social",
+            summary:
+              "Esforço científico sem precedentes permite a reabertura gradual de fronteiras, escolas e atividades culturais em 2021.",
+            date: "10/12/2021",
+            category: "Mundo",
+            icon: "fa-solid fa-globe",
+            image:
+              "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?auto=format&fit=crop&w=1000&q=80",
+            sourceName: "Anuário Global Archive",
+            sourceUrl: "https://pt.wikipedia.org/wiki/2021",
+            content: [
+              "Ao longo de 2021, bilhões de doses de vacinas foram aplicadas mundialmente, reduzindo hospitalizações e viabilizando a recuperação.",
+            ],
+          },
+          {
+            id: "2021-1",
+            featured: false,
+            title:
+              "Rover Perseverance pousa em Marte e realiza primeiro voo controlado",
+            summary:
+              "Helicóptero Ingenuity demonstra viabilidade de voo motorizado na fina atmosfera marciana.",
+            date: "18/02/2021",
+            category: "Ciência e Tecnologia",
+            icon: "fa-solid fa-rocket",
+            image:
+              "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&w=700&q=80",
+            sourceName: "Spaceflight Archive",
+            sourceUrl: "https://pt.wikipedia.org/wiki/Perseverance_(rover)",
+            content: [
+              "O pouso na cratera Jezero iniciou a coleta de amostras geológicas em busca de sinais de vida microbiana antiga.",
+            ],
+          },
+          {
+            id: "2021-2",
+            featured: false,
+            title:
+              "Jogos de Tóquio 2020 são realizados em 2021 com foco na superação",
+            summary:
+              "Mesmo sob protocolos rígidos, atletas celebraram o espírito olímpico e estreias de novas modalidades.",
+            date: "08/08/2021",
+            category: "Esportes",
+            icon: "fa-solid fa-trophy",
+            image:
+              "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=700&q=80",
+            sourceName: "Esporte Mundial",
+            sourceUrl:
+              "https://pt.wikipedia.org/wiki/Jogos_Ol%C3%ADmpicos_de_Ver%C3%A3o_de_2020",
+            content: [
+              "Modalidades como skate e surfe estrearam no programa olímpico com grande engajamento do público jovem.",
+            ],
+          },
+          {
+            id: "2021-3",
+            featured: false,
+            title:
+              "Pacto de Glasgow reforça compromissos contra o aquecimento global",
+            summary:
+              "COP26 destaca a necessidade de redução gradual do uso de carvão e controle das emissões de metano.",
+            date: "13/11/2021",
+            category: "Meio Ambiente",
+            icon: "fa-solid fa-leaf",
+            image:
+              "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=700&q=80",
+            sourceName: "Observatório Ambiental",
+            sourceUrl: "https://pt.wikipedia.org/wiki/COP26",
+            content: [
+              "Líderes mundiais reafirmaram a meta de limitar o aquecimento global a 1,5°C acima dos níveis pré-industriais.",
+            ],
+          },
+        ],
+        2020: [
+          {
+            id: "2020-hero",
+            featured: true,
+            title:
+              "Pandemia global transforma saúde, trabalho remoto e conectividade digital",
+            summary:
+              "O ano de 2020 marcou uma inflexão histórica na sociedade contemporânea, acelerando a digitalização e a cooperação científica.",
+            date: "30/12/2020",
+            category: "Mundo",
+            icon: "fa-solid fa-globe",
+            image:
+              "https://images.unsplash.com/photo-1584483766114-2cea6facdf57?auto=format&fit=crop&w=1000&q=80",
+            sourceName: "Anuário Global Archive",
+            sourceUrl: "https://pt.wikipedia.org/wiki/2020",
+            content: [
+              "Em 2020, o mundo enfrentou uma emergência sanitária global que redefiniu rotinas de trabalho, ensino e comunicação à distância.",
+            ],
+          },
+          {
+            id: "2020-1",
+            featured: false,
+            title:
+              "Primeiro voo tripulado comercial leva astronautas à Estação Espacial",
+            summary:
+              "Parceria público-privada inaugura nova era no transporte orbital a partir dos Estados Unidos.",
+            date: "30/05/2020",
+            category: "Ciência e Tecnologia",
+            icon: "fa-solid fa-rocket",
+            image:
+              "https://images.unsplash.com/photo-1516849841032-87cbac4d88f7?auto=format&fit=crop&w=700&q=80",
+            sourceName: "Spaceflight Archive",
+            sourceUrl: "https://pt.wikipedia.org/wiki/SpaceX_Demo-2",
+            content: [
+              "A missão Demo-2 marcou o retorno dos lançamentos tripulados em solo norte-americano após quase uma década.",
+            ],
+          },
+          {
+            id: "2020-2",
+            featured: false,
+            title:
+              "Esporte mundial se reinventa com protocolos sanitários e arenas virtuais",
+            summary:
+              "Ligas e campeonatos adotam formatos adaptados para concluir temporadas com segurança.",
+            date: "23/08/2020",
+            category: "Esportes",
+            icon: "fa-solid fa-trophy",
+            image:
+              "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=700&q=80",
+            sourceName: "Esporte Mundial",
+            sourceUrl: "https://pt.wikipedia.org/wiki/Desporto_em_2020",
+            content: [
+              "Bolhas sanitárias e transmissões interativas mantiveram o calendário esportivo ativo durante o segundo semestre.",
+            ],
+          },
+          {
+            id: "2020-3",
+            featured: false,
+            title:
+              "Queda temporária nas emissões evidencia impacto da mobilidade urbana",
+            summary:
+              "Estudos ambientais analisam efeitos da redução de deslocamentos e apontam caminhos para cidades mais limpas.",
+            date: "22/04/2020",
+            category: "Meio Ambiente",
+            icon: "fa-solid fa-leaf",
+            image:
+              "https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=700&q=80",
+            sourceName: "Observatório Ambiental",
+            sourceUrl: "https://pt.wikipedia.org/wiki/Meio_ambiente",
+            content: [
+              "Medições atmosféricas demonstraram melhorias imediatas na qualidade do ar em grandes centros urbanos.",
+            ],
+          },
+        ],
+      };
+
+      // =========================================================================
+      // 3. SERVIÇO DE INTEGRAÇÃO REAL COM APIs DE NOTÍCIAS (NewsService v2.0)
+      // =========================================================================
+      const YEARS = [2026, 2025, 2024, 2023, 2022, 2021, 2020];
+
+      const NewsService = {
+        config: {
+          provider: localStorage.getItem("ag_api_provider") || "open_live",
+          apiKey: localStorage.getItem("ag_api_key") || "",
+          customUrl: localStorage.getItem("ag_custom_url") || "",
+        },
+
+        saveConfig(provider, apiKey, customUrl) {
+          this.config.provider = provider;
+          this.config.apiKey = apiKey.trim();
+          this.config.customUrl = customUrl.trim();
+          localStorage.setItem("ag_api_provider", this.config.provider);
+          localStorage.setItem("ag_api_key", this.config.apiKey);
+          localStorage.setItem("ag_custom_url", this.config.customUrl);
+          this.clearCache();
+        },
+
+        clearCache() {
+          Object.keys(sessionStorage).forEach((k) => {
+            if (k.startsWith("ag_news_cache_")) sessionStorage.removeItem(k);
+          });
+        },
+
+        formatDateBR(isoDate, fallbackYear) {
+          if (!isoDate) return `31/12/${fallbackYear}`;
+          const d = new Date(isoDate);
+          if (isNaN(d.getTime())) return `31/12/${fallbackYear}`;
+          const day = String(d.getUTCDate()).padStart(2, "0");
+          const month = String(d.getUTCMonth() + 1).padStart(2, "0");
+          const year = d.getUTCFullYear();
+          return `${day}/${month}/${year}`;
+        },
+
+        classifyCategory(text) {
+          const t = (text || "").toLowerCase();
+          if (
+            /nasa|spacex|foguete|espacial|tecnologia|ia|inteligência|ciência|lua|marte|orbit|launch|space/.test(
+              t,
+            )
+          ) {
+            return { name: "Ciência e Tecnologia", icon: "fa-solid fa-rocket" };
+          }
+          if (
+            /olímp|copa|futebol|esporte|atleta|campeonato|medalha|fifa|jogo/.test(
+              t,
+            )
+          ) {
+            return { name: "Esportes", icon: "fa-solid fa-trophy" };
+          }
+          if (
+            /amazônia|clima|ambiental|floresta|oceano|energia|sustent|carbono|natureza/.test(
+              t,
+            )
+          ) {
+            return { name: "Meio Ambiente", icon: "fa-solid fa-leaf" };
+          }
+          return { name: "Mundo", icon: "fa-solid fa-globe" };
+        },
+
+        async fetchOpenLive(year, keyword = "") {
+          const articles = [];
+          const searchTerm = keyword
+            ? `${keyword} ${year}`
+            : `acontecimentos ${year} mundo`;
+
+          const wikiSearchUrl = `https://pt.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(searchTerm)}&srlimit=6&format=json&origin=*`;
+          const spaceUrl = keyword
+            ? `https://api.spaceflightnewsapi.net/v4/articles/?search=${encodeURIComponent(keyword)}&limit=3`
+            : `https://api.spaceflightnewsapi.net/v4/articles/?published_at_gte=${year}-01-01T00:00:00Z&published_at_lte=${year}-12-31T23:59:59Z&limit=3`;
+
+          const [wikiRes, spaceRes] = await Promise.allSettled([
+            fetch(wikiSearchUrl),
+            fetch(spaceUrl),
+          ]);
+
+          if (wikiRes.status === "fulfilled" && wikiRes.value.ok) {
+            const wikiJson = await wikiRes.value.json();
+            const hits = (wikiJson?.query?.search || []).slice(0, 4);
+
+            const summaryPromises = hits.map(async (hit) => {
+              try {
+                const titleSlug = encodeURIComponent(
+                  hit.title.replace(/ /g, "_"),
+                );
+                const sumRes = await fetch(
+                  `https://pt.wikipedia.org/api/rest_v1/page/summary/${titleSlug}`,
+                );
+                if (!sumRes.ok) return null;
+                return await sumRes.json();
+              } catch {
+                return null;
+              }
+            });
+
+            const summaries = (await Promise.all(summaryPromises)).filter(
+              Boolean,
+            );
+
+            summaries.forEach((s, idx) => {
+              const cleanExtract = (s.extract || "").trim();
+              if (!cleanExtract) return;
+              const cat = this.classifyCategory(`${s.title} ${cleanExtract}`);
+              const imgUrl =
+                s.originalimage?.source ||
+                s.thumbnail?.source ||
+                createFallbackSvg(s.title, cat.name, year);
+
+              articles.push({
+                id: `wiki-${year}-${s.pageid || idx}`,
+                featured: idx === 0,
+                title: s.title,
+                summary:
+                  cleanExtract.length > 195
+                    ? cleanExtract.slice(0, 192) + "..."
+                    : cleanExtract,
+                date: s.timestamp
+                  ? this.formatDateBR(s.timestamp, year)
+                  : `31/12/${year}`,
+                category: idx === 0 && !keyword ? "Mundo" : cat.name,
+                icon: idx === 0 && !keyword ? "fa-solid fa-globe" : cat.icon,
+                image: imgUrl,
+                sourceName: "Wikipedia PT API (REST v1)",
+                sourceUrl:
+                  s.content_urls?.desktop?.page ||
+                  `https://pt.wikipedia.org/wiki/${encodeURIComponent(s.title)}`,
+                content: [
+                  cleanExtract,
+                  `Registro enciclopédico sincronizado diretamente via Wikipedia PT REST API referente ao panorama de ${year}.`,
+                  `Para aprofundamento documental e referências bibliográficas completas, utilize o botão "Ler na Fonte Original" abaixo.`,
+                ],
+              });
+            });
+          }
+
+          if (spaceRes.status === "fulfilled" && spaceRes.value.ok) {
+            const spaceJson = await spaceRes.value.json();
+            const spaceResults = spaceJson?.results || [];
+
+            spaceResults.forEach((item, idx) => {
+              if (articles.length >= 4) return;
+              articles.push({
+                id: `snapi-${year}-${item.id || idx}`,
+                featured: articles.length === 0,
+                title: item.title,
+                summary:
+                  (item.summary || "").length > 180
+                    ? item.summary.slice(0, 177) + "..."
+                    : item.summary ||
+                      "Atualização aeroespacial e científica em tempo real.",
+                date: this.formatDateBR(item.published_at, year),
+                category: "Ciência e Tecnologia",
+                icon: "fa-solid fa-rocket",
+                image:
+                  item.image_url ||
+                  createFallbackSvg(item.title, "Ciência e Tecnologia", year),
+                sourceName: `${item.news_site || "Spaceflight News"} (API v4)`,
+                sourceUrl:
+                  item.url || "https://api.spaceflightnewsapi.net/v4/docs/",
+                content: [
+                  item.summary || item.title,
+                  `Matéria indexada em tempo real pela Spaceflight News API v4 (Fonte: ${item.news_site || "Agência Espacial"}).`,
+                  `Data de publicação original: ${this.formatDateBR(item.published_at, year)}.`,
+                ],
+              });
+            });
+          }
+
+          return articles;
+        },
+
+        async fetchGNews(year, keyword = "") {
+          if (!this.config.apiKey)
+            throw new Error("API Key do GNews não configurada.");
+          const q = encodeURIComponent(keyword || `mundo Brasil ${year}`);
+          const url = `https://gnews.io/api/v4/search?q=${q}&lang=pt&max=4&from=${year}-01-01T00:00:00Z&to=${year}-12-31T23:59:59Z&apikey=${encodeURIComponent(this.config.apiKey)}`;
+          const res = await fetch(url);
+          if (!res.ok) throw new Error(`GNews HTTP ${res.status}`);
+          const data = await res.json();
+          return (data.articles || []).map((a, idx) => {
+            const cat = this.classifyCategory(`${a.title} ${a.description}`);
+            return {
+              id: `gnews-${year}-${idx}`,
+              featured: idx === 0,
+              title: a.title,
+              summary: a.description || a.title,
+              date: this.formatDateBR(a.publishedAt, year),
+              category: cat.name,
+              icon: cat.icon,
+              image: a.image || createFallbackSvg(a.title, cat.name, year),
+              sourceName: `${a.source?.name || "GNews"} (GNews API)`,
+              sourceUrl: a.url,
+              content: [
+                a.description || a.title,
+                a.content || "Leia a reportagem completa no portal de origem.",
+              ],
+            };
+          });
+        },
+
+        async fetchNewsApiOrg(year, keyword = "") {
+          if (!this.config.apiKey)
+            throw new Error("API Key do NewsAPI.org não configurada.");
+          const q = encodeURIComponent(
+            keyword || `mundo OR tecnologia OR clima`,
+          );
+          const url = `https://newsapi.org/v2/everything?q=${q}&language=pt&pageSize=4&sortBy=relevancy&apiKey=${encodeURIComponent(this.config.apiKey)}`;
+          const res = await fetch(url);
+          if (!res.ok) throw new Error(`NewsAPI HTTP ${res.status}`);
+          const data = await res.json();
+          return (data.articles || []).map((a, idx) => {
+            const cat = this.classifyCategory(`${a.title} ${a.description}`);
+            return {
+              id: `newsapi-${year}-${idx}`,
+              featured: idx === 0,
+              title: a.title,
+              summary: a.description || a.title,
+              date: this.formatDateBR(a.publishedAt, year),
+              category: cat.name,
+              icon: cat.icon,
+              image: a.urlToImage || createFallbackSvg(a.title, cat.name, year),
+              sourceName: `${a.source?.name || "NewsAPI"} (NewsAPI v2)`,
+              sourceUrl: a.url,
+              content: [
+                a.description || a.title,
+                a.content || "Acesse o veículo original para o texto integral.",
+              ],
+            };
+          });
+        },
+
+        async fetchCustomEndpoint(year, keyword = "") {
+          if (!this.config.customUrl)
+            throw new Error("URL do endpoint personalizado não definida.");
+          const url = this.config.customUrl
+            .replace("{year}", encodeURIComponent(year))
+            .replace("{query}", encodeURIComponent(keyword || ""));
+          const headers = this.config.apiKey
+            ? { Authorization: `Bearer ${this.config.apiKey}` }
+            : {};
+          const res = await fetch(url, { headers });
+          if (!res.ok) throw new Error(`Endpoint HTTP ${res.status}`);
+          const raw = await res.json();
+          const list = Array.isArray(raw)
+            ? raw
+            : raw.articles || raw.results || raw.data || [];
+          return list.slice(0, 4).map((a, idx) => {
+            const title = a.title || a.titulo || "Notícia";
+            const summary = a.summary || a.description || a.resumo || title;
+            const cat = this.classifyCategory(`${title} ${summary}`);
+            return {
+              id: `custom-${year}-${idx}`,
+              featured: idx === 0,
+              title,
+              summary,
+              date: this.formatDateBR(a.date || a.publishedAt || a.data, year),
+              category: a.category || cat.name,
+              icon: cat.icon,
+              image:
+                a.image ||
+                a.urlToImage ||
+                a.imagem ||
+                createFallbackSvg(title, cat.name, year),
+              sourceName: a.sourceName || "API REST Personalizada",
+              sourceUrl: a.url || a.link || "#",
+              content: Array.isArray(a.content) ? a.content : [summary],
+            };
+          });
+        },
+
+        async getNews(year, keyword = "", forceRefresh = false) {
+          const cacheKey = `ag_news_cache_${this.config.provider}_${year}_${keyword.toLowerCase()}`;
+          const t0 = performance.now();
+
+          if (!forceRefresh) {
+            const cached = sessionStorage.getItem(cacheKey);
+            if (cached) {
+              try {
+                const parsed = JSON.parse(cached);
+                return {
+                  articles: parsed,
+                  live: true,
+                  fromCache: true,
+                  latencyMs: Math.max(1, Math.round(performance.now() - t0)),
+                  providerLabel: this.getProviderDisplayName(),
+                };
+              } catch {}
+            }
+          }
+
+          try {
+            let articles = [];
+            if (this.config.provider === "gnews") {
+              articles = await this.fetchGNews(year, keyword);
+            } else if (this.config.provider === "newsapi") {
+              articles = await this.fetchNewsApiOrg(year, keyword);
+            } else if (this.config.provider === "custom") {
+              articles = await this.fetchCustomEndpoint(year, keyword);
+            } else {
+              articles = await this.fetchOpenLive(year, keyword);
+            }
+
+            if (articles.length > 0 && articles.length < 4 && !keyword) {
+              const backup = (FALLBACK_NEWS_DATA[year] || []).slice(
+                articles.length,
+                4,
+              );
+              articles = [...articles, ...backup];
+            }
+
+            if (articles.length === 0) {
+              throw new Error("Nenhum item retornado pelo endpoint.");
+            }
+
+            articles[0].featured = true;
+            sessionStorage.setItem(cacheKey, JSON.stringify(articles));
+
+            return {
+              articles,
+              live: true,
+              fromCache: false,
+              latencyMs: Math.round(performance.now() - t0),
+              providerLabel: this.getProviderDisplayName(),
+            };
+          } catch (err) {
+            console.warn("[Anuário Global API Fallback]:", err.message);
+            let fallbackList = FALLBACK_NEWS_DATA[year] || [];
+            if (keyword) {
+              const q = keyword.toLowerCase();
+              fallbackList = fallbackList.filter(
+                (item) =>
+                  item.title.toLowerCase().includes(q) ||
+                  item.summary.toLowerCase().includes(q) ||
+                  item.category.toLowerCase().includes(q),
+              );
+            }
+            return {
+              articles: fallbackList,
+              live: false,
+              fromCache: false,
+              errorMessage: err.message,
+              latencyMs: Math.round(performance.now() - t0),
+              providerLabel: "Acervo Local (Contingência)",
+            };
+          }
+        },
+
+        getProviderDisplayName() {
+          const map = {
+            open_live: "Wikipedia PT + Spaceflight News API",
+            gnews: "GNews API v4",
+            newsapi: "NewsAPI.org v2",
+            custom: "Endpoint REST Personalizado",
+          };
+          return map[this.config.provider] || "API Conectada";
+        },
+      };
+
+      // =========================================================================
+      // 4. ESTADO DA APLICAÇÃO & REFERÊNCIAS DO DOM
+      // =========================================================================
+      let selectedYear = 2026;
+      let searchQuery = "";
+      let searchAllYears = false;
+      let currentRenderedArticles = [];
+
+      const yearSelectorList = document.getElementById("yearSelectorList");
+      const sectionHeading = document.getElementById("sectionHeading");
+      const resultsCounter = document.getElementById("resultsCounter");
+      const featuredNewsContainer = document.getElementById(
+        "featuredNewsContainer",
+      );
+      const secondaryNewsGrid = document.getElementById("secondaryNewsGrid");
+      const searchInput = document.getElementById("searchInput");
+      const clearSearchBtn = document.getElementById("clearSearchBtn");
+      const btnToggleAllYearsSearch = document.getElementById(
+        "btnToggleAllYearsSearch",
+      );
+
+      const telemetryText = document.getElementById("telemetryText");
+      const telemetryLatency = document.getElementById("telemetryLatency");
+      const telemetryEndpoint = document.getElementById("telemetryEndpoint");
+      const sourceBadge = document.getElementById("sourceBadge");
+      const sourceBadgeText = document.getElementById("sourceBadgeText");
+      const sidebarProviderLabel = document.getElementById(
+        "sidebarProviderLabel",
+      );
+      const sidebarStatusDot = document.getElementById("sidebarStatusDot");
+      const btnRefreshApi = document.getElementById("btnRefreshApi");
+      const refreshIcon = document.getElementById("refreshIcon");
+
+      // =========================================================================
+      // 5. RENDERIZAÇÃO DOS BOTÕES DE ANOS (2026 A 2020)
+      // =========================================================================
+      function renderYearButtons() {
+        yearSelectorList.innerHTML = YEARS.map((year) => {
+          const isActive = year === selectedYear && !searchAllYears;
+          return `
+          <button
+            data-year="${year}"
+            class="year-pill ${isActive ? "active" : ""} w-full py-2 sm:py-2.5 px-3 sm:px-4 rounded-full flex items-center justify-center lg:justify-start gap-2.5 font-extrabold text-base sm:text-xl tracking-wide cursor-pointer"
+          >
+            <i class="fa-regular fa-calendar text-sm sm:text-base opacity-90"></i>
+            <span>${year}</span>
+          </button>
+        `;
+        }).join("");
+
+        yearSelectorList
+          .querySelectorAll("button[data-year]")
+          .forEach((btn) => {
+            btn.addEventListener("click", () => {
+              selectedYear = Number(btn.dataset.year);
+              searchAllYears = false;
+              renderYearButtons();
+              loadAndRenderNews(false);
+            });
+          });
+      }
+
+      // =========================================================================
+      // 6. ESTADO DE CARREGAMENTO (SKELETON) + RENDERIZAÇÃO ASSÍNCRONA DA API
+      // =========================================================================
+      function renderLoadingSkeleton() {
+        featuredNewsContainer.classList.remove("hidden");
+        featuredNewsContainer.innerHTML = `
+        <div class="grid grid-cols-1 md:grid-cols-[54%_46%] items-stretch">
+          <div class="skeleton-box h-52 sm:h-64 md:h-[265px]"></div>
+          <div class="p-4 sm:p-6 flex flex-col justify-between space-y-3">
+            <div class="space-y-2.5">
+              <div class="skeleton-box h-7 w-4/5 rounded"></div>
+              <div class="skeleton-box h-7 w-3/5 rounded"></div>
+              <div class="skeleton-box h-4 w-full rounded mt-3"></div>
+              <div class="skeleton-box h-4 w-5/6 rounded"></div>
+            </div>
+            <div class="skeleton-box h-5 w-1/2 rounded pt-2"></div>
+          </div>
+        </div>
+      `;
+
+        secondaryNewsGrid.innerHTML = [1, 2, 3]
+          .map(
+            () => `
+        <div class="news-card-white rounded-xl overflow-hidden flex flex-col justify-between">
+          <div>
+            <div class="skeleton-box h-32 w-full"></div>
+            <div class="p-3 space-y-2">
+              <div class="skeleton-box h-4 w-11/12 rounded"></div>
+              <div class="skeleton-box h-4 w-2/3 rounded"></div>
+            </div>
+          </div>
+          <div class="px-3 pb-3">
+            <div class="skeleton-box h-3 w-3/4 rounded"></div>
+          </div>
+        </div>
+      `,
+          )
+          .join("");
+      }
+
+      function updateTelemetryUI(result) {
+        telemetryEndpoint.textContent = result.providerLabel;
+        telemetryLatency.innerHTML = `<i class="fa-solid fa-bolt text-amber-300 mr-1"></i>${result.latencyMs} ms`;
+
+        if (result.live) {
+          telemetryText.textContent = result.fromCache
+            ? `Dados sincronizados da API (${result.providerLabel}) • Cache ativo`
+            : `Conexão HTTP 200 OK com ${result.providerLabel}`;
+          sourceBadge.className =
+            "inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-extrabold uppercase tracking-wider bg-emerald-400/20 text-emerald-200 border border-emerald-300/40";
+          sourceBadgeText.textContent = "API REAL ATIVA";
+          sidebarProviderLabel.textContent = "API Conectada";
+          sidebarProviderLabel.className =
+            "flex items-center gap-1.5 text-emerald-300 font-bold";
+          sidebarStatusDot.className =
+            "w-2 h-2 rounded-full bg-emerald-400 animate-pulse";
+        } else {
+          telemetryText.textContent = `Modo de contingência local (${result.errorMessage || "sem resposta da rede"})`;
+          sourceBadge.className =
+            "inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-extrabold uppercase tracking-wider bg-amber-400/25 text-amber-200 border border-amber-300/50";
+          sourceBadgeText.textContent = "CONTINGÊNCIA OFFLINE";
+          sidebarProviderLabel.textContent = "Modo Offline";
+          sidebarProviderLabel.className =
+            "flex items-center gap-1.5 text-amber-300 font-bold";
+          sidebarStatusDot.className = "w-2 h-2 rounded-full bg-amber-400";
+        }
+      }
+
+      async function loadAndRenderNews(forceRefresh = false) {
+        const q = searchQuery.trim();
+        refreshIcon.classList.add("fa-spin");
+        telemetryText.textContent = `Consultando API em tempo real (${NewsService.getProviderDisplayName()})...`;
+        renderLoadingSkeleton();
+
+        let articles = [];
+        let latestResult = null;
+
+        if (q && searchAllYears) {
+          sectionHeading.innerHTML = `RESULTADOS DA BUSCA &bull; TODOS OS ANOS`;
+          btnToggleAllYearsSearch.classList.add("hidden");
+
+          const multiResults = await Promise.all(
+            YEARS.map((yr) => NewsService.getNews(yr, q, forceRefresh)),
+          );
+          latestResult = multiResults[0];
+          multiResults.forEach((res, idx) => {
+            const yr = YEARS[idx];
+            res.articles.forEach((item) => {
+              articles.push({ ...item, yearLabel: yr });
+            });
+          });
+        } else if (q) {
+          sectionHeading.innerHTML = `BUSCA EM ${selectedYear} &bull; "${q.toUpperCase()}"`;
+          btnToggleAllYearsSearch.classList.remove("hidden");
+          latestResult = await NewsService.getNews(
+            selectedYear,
+            q,
+            forceRefresh,
+          );
+          articles = latestResult.articles.map((item) => ({
+            ...item,
+            yearLabel: selectedYear,
+          }));
+        } else {
+          sectionHeading.innerHTML = `PRINCIPAIS NOTÍCIAS &bull; ${selectedYear}`;
+          btnToggleAllYearsSearch.classList.add("hidden");
+          latestResult = await NewsService.getNews(
+            selectedYear,
+            "",
+            forceRefresh,
+          );
+          articles = latestResult.articles.map((item) => ({
+            ...item,
+            yearLabel: selectedYear,
+          }));
+        }
+
+        refreshIcon.classList.remove("fa-spin");
+        if (latestResult) updateTelemetryUI(latestResult);
+
+        currentRenderedArticles = articles;
+
+        resultsCounter.textContent =
+          articles.length === 1
+            ? "1 matéria encontrada"
+            : `${articles.length} matérias ${q ? "encontradas" : "em destaque"}`;
+
+        if (articles.length === 0) {
+          featuredNewsContainer.classList.add("hidden");
+          secondaryNewsGrid.innerHTML = `
+          <div class="col-span-full bg-white/95 text-slate-800 rounded-xl p-8 text-center shadow-lg">
+            <i class="fa-solid fa-magnifying-glass text-4xl text-blue-700 mb-3"></i>
+            <h3 class="text-lg font-extrabold text-slate-900">Nenhuma notícia encontrada para "${q}"</h3>
+            <p class="text-sm text-slate-600 mt-1">Tente buscar por outra palavra-chave ou pesquise em todo o acervo de 2020 a 2026.</p>
+            <button id="btnEmptySearchAll" class="mt-4 btn-anuncie px-5 py-2 rounded-full text-xs font-black uppercase cursor-pointer">
+              Pesquisar em todos os anos (2020–2026)
+            </button>
+          </div>
+        `;
+          const emptyBtn = document.getElementById("btnEmptySearchAll");
+          if (emptyBtn) {
+            emptyBtn.addEventListener("click", () => {
+              searchAllYears = true;
+              renderYearButtons();
+              loadAndRenderNews(false);
+            });
+          }
+          return;
+        }
+
+        const hero = articles.find((a) => a.featured) || articles[0];
+        const others = articles.filter((a) => a.id !== hero.id);
+        const fallbackHeroSvg = createFallbackSvg(
+          hero.title,
+          hero.category,
+          hero.yearLabel,
+        );
+
+        featuredNewsContainer.classList.remove("hidden");
+        featuredNewsContainer.innerHTML = `
+        <div class="grid grid-cols-1 md:grid-cols-[54%_46%] items-stretch">
+          <div class="relative overflow-hidden h-52 sm:h-64 md:h-[265px] bg-slate-900">
+            <img
+              src="${hero.image}"
+              alt="${hero.title}"
+              onerror="this.onerror=null;this.src='${fallbackHeroSvg}'"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+            <span class="absolute top-3 left-3 bg-blue-950/90 text-amber-300 border border-amber-300/40 text-[11px] font-extrabold uppercase px-2.5 py-1 rounded-md shadow">
+              Destaque ${hero.yearLabel}
+            </span>
+            <span class="absolute bottom-2.5 right-2.5 bg-slate-950/85 text-emerald-300 border border-emerald-400/35 text-[10px] font-bold px-2 py-0.5 rounded">
+              <i class="fa-solid fa-rss mr-1"></i>${hero.sourceName || "API"}
+            </span>
+          </div>
+
+          <div class="p-4 sm:p-6 flex flex-col justify-between bg-gradient-to-br from-white to-slate-100">
+            <div>
+              <h3 class="text-xl sm:text-[26px] font-extrabold text-[#0c234b] leading-[1.18] group-hover:text-blue-700 transition-colors">
+                ${hero.title}
+              </h3>
+              <p class="mt-2.5 text-slate-600 text-xs sm:text-[14.5px] leading-relaxed font-medium line-clamp-4">
+                ${hero.summary}
+              </p>
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-slate-200 flex items-center justify-between text-xs sm:text-[13px] font-bold text-slate-700">
+              <div class="flex items-center gap-2.5 flex-wrap">
+                <span class="flex items-center gap-1.5 text-slate-800">
+                  <i class="fa-regular fa-calendar-days text-blue-700"></i>
+                  ${hero.date}
+                </span>
+                <span class="text-amber-500 font-black">|</span>
+                <span class="flex items-center gap-1.5 text-slate-700">
+                  <i class="${hero.icon} text-blue-700"></i>
+                  ${hero.category}
+                </span>
+              </div>
+              <span class="text-blue-700 group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
+                Ler <i class="fa-solid fa-chevron-right text-[10px]"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      `;
+        featuredNewsContainer.onclick = () => openNewsModal(hero);
+
+        secondaryNewsGrid.innerHTML = others
+          .map((item) => {
+            const fallbackCardSvg = createFallbackSvg(
+              item.title,
+              item.category,
+              item.yearLabel,
+            );
+            return `
+          <article
+            data-news-id="${item.id}"
+            class="news-card-white rounded-xl overflow-hidden text-slate-800 cursor-pointer flex flex-col justify-between group"
+          >
+            <div>
+              <div class="relative h-32 sm:h-36 overflow-hidden bg-slate-900">
+                <img
+                  src="${item.image}"
+                  alt="${item.title}"
+                  onerror="this.onerror=null;this.src='${fallbackCardSvg}'"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                ${searchAllYears ? `<span class="absolute top-2 right-2 bg-amber-400 text-slate-950 font-black text-[11px] px-2 py-0.5 rounded">${item.yearLabel}</span>` : ""}
+              </div>
+              <div class="p-3 pb-2">
+                <h4 class="font-extrabold text-sm sm:text-[15px] text-[#0c234b] leading-snug group-hover:text-blue-700 transition-colors line-clamp-2">
+                  ${item.title}
+                </h4>
+              </div>
+            </div>
+
+            <div class="px-3 pb-3 pt-1 flex items-center gap-2 text-[11px] sm:text-xs font-bold text-slate-600">
+              <span class="flex items-center gap-1 whitespace-nowrap">
+                <i class="fa-regular fa-calendar text-blue-700"></i>
+                ${item.date}
+              </span>
+              <span class="text-amber-500 font-black">|</span>
+              <span class="flex items-center gap-1 truncate">
+                <i class="${item.icon} text-blue-700"></i>
+                <span class="truncate">${item.category}</span>
+              </span>
+            </div>
+          </article>
+        `;
+          })
+          .join("");
+
+        secondaryNewsGrid
+          .querySelectorAll("article[data-news-id]")
+          .forEach((card) => {
+            card.addEventListener("click", () => {
+              const id = card.dataset.newsId;
+              const found = currentRenderedArticles.find((a) => a.id === id);
+              if (found) openNewsModal(found);
+            });
+          });
+      }
+
+      // =========================================================================
+      // 7. PESQUISA POR PALAVRAS-CHAVE + BOTÃO SINCRONIZAR
+      // =========================================================================
+      let searchDebounce = null;
+      searchInput.addEventListener("input", (e) => {
+        searchQuery = e.target.value;
+        clearSearchBtn.classList.toggle("hidden", searchQuery.length === 0);
+        if (!searchQuery.trim()) {
+          searchAllYears = false;
+          renderYearButtons();
+        }
+        clearTimeout(searchDebounce);
+        searchDebounce = setTimeout(() => {
+          loadAndRenderNews(false);
+        }, 380);
+      });
+
+      clearSearchBtn.addEventListener("click", () => {
+        searchInput.value = "";
+        searchQuery = "";
+        searchAllYears = false;
+        clearSearchBtn.classList.add("hidden");
+        renderYearButtons();
+        loadAndRenderNews(false);
+        searchInput.focus();
+      });
+
+      btnToggleAllYearsSearch.addEventListener("click", () => {
+        searchAllYears = true;
+        renderYearButtons();
+        loadAndRenderNews(false);
+      });
+
+      btnRefreshApi.addEventListener("click", () => {
+        loadAndRenderNews(true);
+        showToast("Sincronizando notícias diretamente com a API...");
+      });
+
+      // =========================================================================
+      // 8. JANELA MODAL PARA LEITURA COMPLETA DAS NOTÍCIAS
+      // =========================================================================
+      const newsModal = document.getElementById("newsModal");
+      const closeNewsModalBtn = document.getElementById("closeNewsModal");
+      const modalCategoryYear = document.getElementById("modalCategoryYear");
+      const modalImage = document.getElementById("modalImage");
+      const modalDateBadge = document.getElementById("modalDateBadge");
+      const modalSourceTag = document.getElementById("modalSourceTag");
+      const modalTitle = document.getElementById("modalTitle");
+      const modalSummary = document.getElementById("modalSummary");
+      const modalBody = document.getElementById("modalBody");
+      const modalOriginalUrl = document.getElementById("modalOriginalUrl");
+      const btnShareNews = document.getElementById("btnShareNews");
+
+      function openNewsModal(article) {
+        const fallbackModalSvg = createFallbackSvg(
+          article.title,
+          article.category,
+          article.yearLabel || selectedYear,
+        );
+        modalCategoryYear.textContent = `${article.category.toUpperCase()} • ${article.yearLabel || selectedYear}`;
+        modalImage.onerror = () => {
+          modalImage.src = fallbackModalSvg;
+        };
+        modalImage.src = article.image;
+        modalImage.alt = article.title;
+        modalDateBadge.innerHTML = `<i class="fa-regular fa-calendar mr-1.5 text-amber-300"></i>${article.date}`;
+        modalSourceTag.textContent = article.sourceName || "API Real";
+        modalTitle.textContent = article.title;
+        modalSummary.textContent = article.summary;
+        modalBody.innerHTML = (article.content || [article.summary])
+          .map((p) => `<p>${p}</p>`)
+          .join("");
+
+        if (article.sourceUrl && article.sourceUrl !== "#") {
+          modalOriginalUrl.href = article.sourceUrl;
+          modalOriginalUrl.classList.remove("hidden");
+        } else {
+          modalOriginalUrl.classList.add("hidden");
+        }
+
+        newsModal.classList.remove("hidden");
+        newsModal.classList.add("flex");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeNewsModal() {
+        newsModal.classList.add("hidden");
+        newsModal.classList.remove("flex");
+        document.body.style.overflow = "";
+      }
+
+      closeNewsModalBtn.addEventListener("click", closeNewsModal);
+      newsModal.addEventListener("click", (e) => {
+        if (e.target === newsModal) closeNewsModal();
+      });
+
+      btnShareNews.addEventListener("click", () => {
+        const shareTarget =
+          modalOriginalUrl.href !== "#"
+            ? modalOriginalUrl.href
+            : window.location.href;
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(
+            `${modalTitle.textContent} — ${shareTarget}`,
+          );
+        }
+        showToast("Link da matéria copiado para a área de transferência!");
+      });
+
+      // =========================================================================
+      // 9. MODAL DE CONFIGURAÇÃO DA API DE NOTÍCIAS (MULTI-PROVEDOR)
+      // =========================================================================
+      const apiConfigModal = document.getElementById("apiConfigModal");
+      const btnOpenApiConfig = document.getElementById("btnOpenApiConfig");
+      const btnConfigApiTop = document.getElementById("btnConfigApiTop");
+      const closeApiConfigModalBtn = document.getElementById(
+        "closeApiConfigModal",
+      );
+      const cancelApiConfigBtn = document.getElementById("cancelApiConfigBtn");
+      const apiConfigForm = document.getElementById("apiConfigForm");
+      const apiProviderSelect = document.getElementById("apiProviderSelect");
+      const apiKeyGroup = document.getElementById("apiKeyGroup");
+      const customEndpointGroup = document.getElementById(
+        "customEndpointGroup",
+      );
+      const apiKeyInput = document.getElementById("apiKeyInput");
+      const customUrlInput = document.getElementById("customUrlInput");
+      const btnClearApiCache = document.getElementById("btnClearApiCache");
+
+      function syncApiFormVisibility() {
+        const val = apiProviderSelect.value;
+        apiKeyGroup.classList.toggle("hidden", val === "open_live");
+        customEndpointGroup.classList.toggle("hidden", val !== "custom");
+      }
+
+      function openApiConfigModal() {
+        apiProviderSelect.value = NewsService.config.provider;
+        apiKeyInput.value = NewsService.config.apiKey;
+        customUrlInput.value = NewsService.config.customUrl;
+        syncApiFormVisibility();
+        apiConfigModal.classList.remove("hidden");
+        apiConfigModal.classList.add("flex");
+      }
+
+      function closeApiConfigModal() {
+        apiConfigModal.classList.add("hidden");
+        apiConfigModal.classList.remove("flex");
+      }
+
+      apiProviderSelect.addEventListener("change", syncApiFormVisibility);
+      btnOpenApiConfig.addEventListener("click", openApiConfigModal);
+      btnConfigApiTop.addEventListener("click", openApiConfigModal);
+      closeApiConfigModalBtn.addEventListener("click", closeApiConfigModal);
+      cancelApiConfigBtn.addEventListener("click", closeApiConfigModal);
+      apiConfigModal.addEventListener("click", (e) => {
+        if (e.target === apiConfigModal) closeApiConfigModal();
+      });
+
+      btnClearApiCache.addEventListener("click", () => {
+        NewsService.clearCache();
+        showToast("Cache de notícias limpo! Recarregando dados da API...");
+        loadAndRenderNews(true);
+      });
+
+      apiConfigForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        NewsService.saveConfig(
+          apiProviderSelect.value,
+          apiKeyInput.value,
+          customUrlInput.value,
+        );
+        closeApiConfigModal();
+        showToast(
+          `Provedor "${NewsService.getProviderDisplayName()}" conectado!`,
+        );
+        loadAndRenderNews(true);
+      });
+
+      // =========================================================================
+      // 10. MODAL DE ANUNCIANTES (ESPAÇO PUBLICITÁRIO)
+      // =========================================================================
+      const adModal = document.getElementById("adModal");
+      const btnAdvertise = document.getElementById("btnAdvertise");
+      const closeAdModalBtn = document.getElementById("closeAdModal");
+      const cancelAdBtn = document.getElementById("cancelAdBtn");
+      const adForm = document.getElementById("adForm");
+
+      function openAdModal() {
+        adModal.classList.remove("hidden");
+        adModal.classList.add("flex");
+      }
+
+      function closeAdModal() {
+        adModal.classList.add("hidden");
+        adModal.classList.remove("flex");
+      }
+
+      btnAdvertise.addEventListener("click", openAdModal);
+      closeAdModalBtn.addEventListener("click", closeAdModal);
+      cancelAdBtn.addEventListener("click", closeAdModal);
+      adModal.addEventListener("click", (e) => {
+        if (e.target === adModal) closeAdModal();
+      });
+
+      adForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        adForm.reset();
+        closeAdModal();
+        showToast(
+          "Solicitação comercial enviada! Nossa equipe entrará em contato.",
+        );
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          closeNewsModal();
+          closeAdModal();
+          closeApiConfigModal();
+        }
+      });
+
+      // =========================================================================
+      // 11. CONTROLES DA JANELA (MINIMIZAR, MAXIMIZAR, RESETAR)
+      // =========================================================================
+      const appWrapper = document.getElementById("appWrapper");
+      const mainPanelContainer = document.getElementById("mainPanelContainer");
+      const btnMinimize = document.getElementById("btnMinimize");
+      const btnMaximize = document.getElementById("btnMaximize");
+      const btnResetView = document.getElementById("btnResetView");
+
+      btnMinimize.addEventListener("click", () => {
+        mainPanelContainer.classList.toggle("hidden");
+        showToast(
+          mainPanelContainer.classList.contains("hidden")
+            ? "Painel recolhido."
+            : "Painel restaurado.",
+        );
+      });
+
+      btnMaximize.addEventListener("click", () => {
+        appWrapper.classList.toggle("max-w-[1380px]");
+        appWrapper.classList.toggle("max-w-full");
+      });
+
+      btnResetView.addEventListener("click", () => {
+        selectedYear = 2026;
+        searchQuery = "";
+        searchAllYears = false;
+        searchInput.value = "";
+        clearSearchBtn.classList.add("hidden");
+        mainPanelContainer.classList.remove("hidden");
+        appWrapper.classList.add("max-w-[1380px]");
+        appWrapper.classList.remove("max-w-full");
+        renderYearButtons();
+        loadAndRenderNews(false);
+        showToast("Visualização padrão (2026) restaurada.");
+      });
+
+      // =========================================================================
+      // 12. RÁDIO WEB SUPER CRYSTAL (STREAMING ZENO.FM + VOLUME)
+      // =========================================================================
+      const STREAM_URL = "https://stream.zeno.fm/ovjrbttvetevv";
+      const radioStreamAudio = document.getElementById("radioStreamAudio");
+      const radioPlayBtn = document.getElementById("radioPlayBtn");
+      const radioPlayIcon = document.getElementById("radioPlayIcon");
+      const radioVolumeSlider = document.getElementById("radioVolumeSlider");
+      const radioMuteBtn = document.getElementById("radioMuteBtn");
+      const radioVolumeIcon = document.getElementById("radioVolumeIcon");
+      const radioTimer = document.getElementById("radioTimer");
+      const radioProgressFill = document.getElementById("radioProgressFill");
+      const eqVisualizer = document.getElementById("eqVisualizer");
+      const liveDot = document.getElementById("liveDot");
+
+      let isPlaying = false;
+      let elapsedSeconds = 0;
+      let timerInterval = null;
+      let previousVolume = 75;
+
+      radioStreamAudio.volume = Number(radioVolumeSlider.value) / 100;
+
+      function formatTime(sec) {
+        const m = String(Math.floor(sec / 60)).padStart(2, "0");
+        const s = String(sec % 60).padStart(2, "0");
+        return `${m}:${s}`;
+      }
+
+      function setPlayingVisualState(playing) {
+        isPlaying = playing;
+        if (playing) {
+          radioPlayIcon.classList.remove("fa-play", "ml-0.5");
+          radioPlayIcon.classList.add("fa-pause");
+          eqVisualizer.classList.remove("eq-paused");
+          liveDot.classList.add("animate-ping");
+
+          clearInterval(timerInterval);
+          timerInterval = setInterval(() => {
+            elapsedSeconds++;
+            radioTimer.textContent = `${formatTime(elapsedSeconds)} / AO VIVO`;
+            const pct = 30 + ((elapsedSeconds * 7) % 70);
+            radioProgressFill.style.width = `${pct}%`;
+          }, 1000);
+        } else {
+          radioPlayIcon.classList.remove("fa-pause");
+          radioPlayIcon.classList.add("fa-play", "ml-0.5");
+          eqVisualizer.classList.add("eq-paused");
+          liveDot.classList.remove("animate-ping");
+          clearInterval(timerInterval);
+        }
+      }
+
+      radioPlayBtn.addEventListener("click", async () => {
+        if (!isPlaying) {
+          try {
+            radioStreamAudio.src = STREAM_URL;
+            radioStreamAudio.load();
+            radioStreamAudio.volume = Number(radioVolumeSlider.value) / 100;
+            await radioStreamAudio.play();
+            setPlayingVisualState(true);
+            showToast(
+              "Rádio Web SUPER CRYSTAL — Conectado ao streaming ao vivo!",
+            );
+          } catch (err) {
+            console.warn("Falha ao reproduzir stream Zeno.fm:", err);
+            setPlayingVisualState(false);
+            showToast(
+              "Não foi possível iniciar o stream agora. Verifique sua conexão ou tente novamente.",
+            );
+          }
+        } else {
+          radioStreamAudio.pause();
+          radioStreamAudio.src = "";
+          setPlayingVisualState(false);
+          showToast("Rádio Web SUPER CRYSTAL — Transmissão pausada.");
+        }
+      });
+
+      radioStreamAudio.addEventListener("error", () => {
+        if (isPlaying) {
+          setPlayingVisualState(false);
+          showToast(
+            "Stream da Rádio Web SUPER CRYSTAL temporariamente indisponível.",
+          );
+        }
+      });
+
+      function updateVolumeUI(val) {
+        const num = Number(val);
+        radioStreamAudio.volume = num / 100;
+        radioStreamAudio.muted = num === 0;
+
+        radioVolumeIcon.className = "fa-solid text-base ";
+        if (num === 0) {
+          radioVolumeIcon.classList.add("fa-volume-xmark", "text-red-400");
+        } else if (num < 50) {
+          radioVolumeIcon.classList.add("fa-volume-low");
+        } else {
+          radioVolumeIcon.classList.add("fa-volume-high");
+        }
+      }
+
+      radioVolumeSlider.addEventListener("input", (e) => {
+        if (Number(e.target.value) > 0) {
+          previousVolume = Number(e.target.value);
+        }
+        updateVolumeUI(e.target.value);
+      });
+
+      radioMuteBtn.addEventListener("click", () => {
+        if (Number(radioVolumeSlider.value) > 0) {
+          previousVolume = Number(radioVolumeSlider.value);
+          radioVolumeSlider.value = 0;
+        } else {
+          radioVolumeSlider.value = previousVolume || 75;
+        }
+        updateVolumeUI(radioVolumeSlider.value);
+      });
+
+      // =========================================================================
+      // 13. UTILITÁRIO DE NOTIFICAÇÃO TOAST + INICIALIZAÇÃO
+      // =========================================================================
+      const toastNotification = document.getElementById("toastNotification");
+      const toastMessage = document.getElementById("toastMessage");
+      let toastTimeout = null;
+
+      function showToast(msg) {
+        toastMessage.textContent = msg;
+        toastNotification.classList.remove("hidden");
+        toastNotification.classList.add("flex");
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+          toastNotification.classList.add("hidden");
+          toastNotification.classList.remove("flex");
+        }, 3200);
+      }
+
+      // Inicializar Aplicação Conectada à API Real
+      renderYearButtons();
+      loadAndRenderNews(false);
+    </script>
+  </body>
+</html>
